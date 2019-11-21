@@ -1,6 +1,7 @@
 {
   "name": "giantsearch",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "dependencies": {
@@ -16,6 +17,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "react-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,5 +29,20 @@
   "bugs": {
     "url": "https://github.com/grantmontgomery/GiantSearch/issues"
   },
-  "homepage": "https://github.com/grantmontgomery/GiantSearch#readme"
+  "homepage": "https://github.com/grantmontgomery/GiantSearch#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  }
 }
