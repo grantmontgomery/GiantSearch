@@ -1,0 +1,31 @@
+.resultBox {
+  height: fit-content;
+  width: fit-content;
+}
+
+.resultBox img {
+  height: 100px;
+  width: auto;
+}
+
+.add {
+  border-radius: 6px;
+  background: green;
+  height: 30px;
+  width: 30px;
+  color: white;
+  margin: 0;
+  border: none;
+  text-align: center;
+}
+
+.remove {
+  border-radius: 6px;
+  background: red;
+  height: 30px;
+  width: 30px;
+  color: white;
+  margin: 0;
+  border: none;
+  text-align: center;
+}
