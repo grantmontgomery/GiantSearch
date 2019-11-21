@@ -1,0 +1,31 @@
+{
+  "name": "giantsearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "^3.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grantmontgomery/GiantSearch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grantmontgomery/GiantSearch/issues"
+  },
+  "homepage": "https://github.com/grantmontgomery/GiantSearch#readme"
+}
