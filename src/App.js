@@ -27,7 +27,7 @@ class App extends Component {
     });
   };
   makeCall = (term, location) => {
-    fetch("http://localhost:5000/", {
+    fetch("http://localhost:5000/yelpSearch", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -35,12 +35,12 @@ class App extends Component {
       method: "POST",
       body: JSON.stringify({ term, location })
     })
-      .then(res => res.json())
+      // .then(res => res.json())
       .then(data => console.log(data))
-      // .then(data => {
-      //   data.businesses.forEach(business => (business["type"] = "venue"));
-      //   this.setState({ Results: data.businesses });
-      // })
+      .then(data => {
+        data.businesses.forEach(business => (business["type"] = "venue"));
+        this.setState({ Results: data.businesses });
+      })
       .catch(err => console.log(err.message));
   };
 

@@ -11,7 +11,7 @@ app.use(json());
 app.use(urlEncoded({ extended: true }));
 app.use(cors());
 
-app.post("/", (req, res) => {
+app.post("/yelpSearch", (req, res) => {
   //Yelp URL
   const yelp = new URL("https://api.yelp.com/v3/businesses/search"),
     params = {
@@ -47,16 +47,21 @@ app.post("/", (req, res) => {
     }
   });
 
-  yelpCall.then(results => results.json()).then(res => res.)
+  yelpCall
+    .then(res => console.log(res))
+    // .then(yelps => yelps.json())
+    // .then(yelpdata => res.send(yelpdata))
+    .catch(err => err.message);
 
   //Ticketmaster Call
 
-  const ticketMasterCall = fetch(ticketMaster);
+  // const ticketMasterCall = fetch(ticketMaster);
 
-  Promise.all([yelpCall, ticketMasterCall])
-    .then(values => Promise.all(values.map(value => value.json())))
-    .then(pieces => Promise.all(pieces.forEach(piece => res.send(piece))))
-    .catch(err => res.send(err.message));
+  // ticketMasterCall
+  //   .then(res => console.log(res))
+  //   // .then(events => events.json())
+  //   // .then(eventdata => res.send(eventdata))
+  //   .catch(err => res.send(err.message));
 });
 
 app.listen(5000, () => {
