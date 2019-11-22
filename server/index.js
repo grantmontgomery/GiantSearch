@@ -48,7 +48,7 @@ app.post("/ticketMasterSearch", (req, res) => {
   );
   fetch(ticketMaster)
     .then(res => res.json())
-    .then(data => res.send(data))
+    .then(data => res.send(data._embedded.events))
     .catch(err => res.send(err.message));
 });
 
