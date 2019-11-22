@@ -28,15 +28,15 @@ app.post("/", (req, res) => {
   const ticketMaster = new URL(
       "https://app.ticketmaster.com/discovery/v2/events"
     ),
-    params = {
+    arguments = {
       apikey: `${process.env.REACT_APP_TICKETMASTER_API_KEY}`,
       postalCode: "90015",
       startDateTime: "2019-11-22T18:00:00Z",
       endDateTime: "2019-11-23T08:00:00Z"
     };
 
-  Object.keys(params).forEach(key =>
-    ticketMaster.searchParams.append(key, params[key])
+  Object.keys(arguments).forEach(key =>
+    ticketMaster.searchParams.append(key, arguments[key])
   );
 
   // Yelp API Call
@@ -47,13 +47,15 @@ app.post("/", (req, res) => {
     }
   });
 
+  yelpCall.then(results => results.json()).then(res => res.)
+
   //Ticketmaster Call
 
   const ticketMasterCall = fetch(ticketMaster);
 
   Promise.all([yelpCall, ticketMasterCall])
     .then(values => Promise.all(values.map(value => value.json())))
-    .then(data => res.send(data))
+    .then(pieces => Promise.all(pieces.forEach(piece => res.send(piece))))
     .catch(err => res.send(err.message));
 });
 

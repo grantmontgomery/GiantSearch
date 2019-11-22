@@ -36,10 +36,11 @@ class App extends Component {
       body: JSON.stringify({ term, location })
     })
       .then(res => res.json())
-      .then(data => {
-        data.businesses.forEach(business => (business["type"] = "venue"));
-        this.setState({ Results: data.businesses });
-      })
+      .then(data => console.log(data))
+      // .then(data => {
+      //   data.businesses.forEach(business => (business["type"] = "venue"));
+      //   this.setState({ Results: data.businesses });
+      // })
       .catch(err => console.log(err.message));
   };
 
