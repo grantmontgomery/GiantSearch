@@ -9,6 +9,9 @@ node_modules
 #api-keys
 .env
 
+#api-tests
+api/
+
 # production
 /build
 
