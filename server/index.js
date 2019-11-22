@@ -45,18 +45,18 @@ app.post("/", (req, res) => {
     headers: {
       Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
     }
-  })
+  });
 
   //Ticketmaster Call
 
-  const ticketMasterCall = fetch(ticketMaster)
+  const ticketMasterCall = fetch(ticketMaster);
 
-
-  Promise.all([yelpCall, ticketMasterCall]).then(values => Promise.all(values.map(value => value.json())))
-  .then(data => res.send(data))
-  .catch(err => res.send(err.message))
-}
+  Promise.all([yelpCall, ticketMasterCall])
+    .then(values => Promise.all(values.map(value => value.json())))
+    .then(data => res.send(data))
+    .catch(err => res.send(err.message));
+});
 
 app.listen(5000, () => {
   console.log("Server running on 5000");
-})
+});
