@@ -36,12 +36,15 @@ class App extends Component {
       body: JSON.stringify({ term, location })
     })
       .then(res => res.json())
-      .then(data => this.setState({ Results: data.businesses }))
+      .then(data => {
+        data.businesses.forEach(business => (business["type"] = "venue"));
+        this.setState({ Results: data.businesses });
+      })
       .catch(err => console.log(err.message));
   };
 
   render() {
-    console.log(this.state.Venues);
+    console.log(this.state);
     return (
       <AppContext.Provider value={this.state}>
         <div>
