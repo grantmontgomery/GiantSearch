@@ -44,8 +44,7 @@ class App extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      method: "POST",
-      body: JSON.stringify({ term, location })
+      method: "POST"
     })
       .then(res => res.json())
       .then(data => console.log(data))
