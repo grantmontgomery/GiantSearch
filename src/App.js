@@ -38,6 +38,18 @@ class App extends Component {
       .then(res => res.json())
       .then(data => this.setState({ Results: data.businesses }))
       .catch(err => console.log(err.message));
+
+    fetch("http://localhost:5000/ticketMasterSearch", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify({ term, location })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err.message));
   };
 
   render() {
