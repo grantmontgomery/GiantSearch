@@ -25,19 +25,19 @@ app.post("/yelpSearch", (req, res) => {
   );
 
   //Ticket Master URL
-  const ticketMaster = new URL(
-      "https://app.ticketmaster.com/discovery/v2/events"
-    ),
-    arguments = {
-      apikey: `${process.env.REACT_APP_TICKETMASTER_API_KEY}`,
-      postalCode: "90015",
-      startDateTime: "2019-11-22T18:00:00Z",
-      endDateTime: "2019-11-23T08:00:00Z"
-    };
+  // const ticketMaster = new URL(
+  //     "https://app.ticketmaster.com/discovery/v2/events"
+  //   ),
+  //   arguments = {
+  //     apikey: `${process.env.REACT_APP_TICKETMASTER_API_KEY}`,
+  //     postalCode: "90015",
+  //     startDateTime: "2019-11-22T18:00:00Z",
+  //     endDateTime: "2019-11-23T08:00:00Z"
+  //   };
 
-  Object.keys(arguments).forEach(key =>
-    ticketMaster.searchParams.append(key, arguments[key])
-  );
+  // Object.keys(arguments).forEach(key =>
+  //   ticketMaster.searchParams.append(key, arguments[key])
+  // );
 
   // Yelp API Call
 
