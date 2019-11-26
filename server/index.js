@@ -39,8 +39,8 @@ app.post("/ticketMasterSearch", (req, res) => {
     arguments = {
       apikey: `${process.env.REACT_APP_TICKETMASTER_API_KEY}`,
       postalCode: "90015",
-      startDateTime: "2019-11-22T18:00:00Z",
-      endDateTime: "2019-11-23T08:00:00Z"
+      startDateTime: "2019-11-29T18:00:00Z",
+      endDateTime: "2019-11-30T08:00:00Z"
     };
 
   Object.keys(arguments).forEach(key =>
@@ -48,7 +48,7 @@ app.post("/ticketMasterSearch", (req, res) => {
   );
   fetch(ticketMaster)
     .then(res => res.json())
-    .then(data => res.send(data))
+    .then(data => res.send(data._embedded.events))
     .catch(err => res.send(err.message));
 });
 
