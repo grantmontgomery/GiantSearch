@@ -9,10 +9,13 @@ class Results extends Component {
 
   render() {
     return (
-      <div className="resultsBox">
-        {this.props.Results.map(result => {
-          return <Result key={result.id} result={result}></Result>;
-        })}
+      // <div className="resultsBox">
+      //   {this.props.Results.map(result => {
+      //     return <Result key={result.id} result={result}></Result>;
+      //   })}
+      // </div>
+      <div>
+        <p>Under Construction until this.props.Results is solved.</p>
       </div>
     );
   }

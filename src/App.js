@@ -36,7 +36,13 @@ class App extends Component {
       body: JSON.stringify({ term, location })
     })
       .then(res => res.json())
-      .then(data => this.setState({ Results: data.businesses }))
+      .then(data => {
+        const { businesses } = data;
+        businesses.forEach(business => (business["type"] = "venue"));
+        this.setState({
+          Results: [...this.state.Results, ...businesses]
+        });
+      })
       .catch(err => console.log(err.message));
 
     fetch("http://localhost:5000/ticketMasterSearch", {
@@ -48,7 +54,11 @@ class App extends Component {
       body: JSON.stringify({ location, startFormatted, endFormatted })
     })
       .then(res => res.json())
-      .then(data => console.log(data._embedded.events))
+      .then(data =>
+        this.setState({
+          Results: [...this.state.Results, ...data._embedded.events]
+        })
+      )
       .catch(err => console.log(err.message));
   };
 
