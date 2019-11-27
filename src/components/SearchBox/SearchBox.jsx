@@ -115,7 +115,7 @@ class SearchBox extends Component {
     } else {
       makecall(term, location, startFormatted, endFormatted);
     }
-    this.setState({});
+    this.setState({ term: "", location: "", startFormatted: "" });
   };
 
   render() {
