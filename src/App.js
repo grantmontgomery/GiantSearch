@@ -26,7 +26,7 @@ class App extends Component {
       Venues: this.state.Venues.filter(venue => venue.name !== name)
     });
   };
-  makeCall = (term, location) => {
+  makeCall = (term, location, startFormatted, endFormatted) => {
     fetch("http://localhost:5000/yelpSearch", {
       headers: {
         Accept: "application/json",
@@ -45,10 +45,10 @@ class App extends Component {
         "Content-Type": "application/json"
       },
       method: "POST",
-      body: JSON.stringify({ term, location })
+      body: JSON.stringify({ location, startFormatted, endFormatted })
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => console.log(data._embedded.events))
       .catch(err => console.log(err.message));
   };
 
