@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { AppContext } from "../../AppContext";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./SearchBox.css";
 
 require("dotenv").config();
@@ -7,28 +9,113 @@ require("dotenv").config();
 class SearchBox extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      term: "",
-      location: ""
-    };
+    this.state = {};
   }
 
   updateTextInput = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handleChange = date => {
+    const selectedDate = new Date(date);
+    this.setState({ date: selectedDate });
+    let months =
+      selectedDate.getMonth() === 0
+        ? `0${1}`
+        : selectedDate.getMonth() + 1 < 10
+        ? "0" + (selectedDate.getMonth() + 1)
+        : selectedDate.getMonth() + 1;
+    let days =
+      selectedDate.getDate() === 0
+        ? selectedDate.getDate() + "0"
+        : selectedDate.getDate() < 10
+        ? "0" + selectedDate.getDate()
+        : selectedDate.getDate();
+    let hours =
+      selectedDate.getHours() === 0
+        ? selectedDate.getHours() + "0"
+        : selectedDate.getHours() < 10
+        ? "0" + selectedDate.getHours()
+        : selectedDate.getHours();
+    let minutes =
+      selectedDate.getMinutes() === 0
+        ? selectedDate.getMinutes() + "0"
+        : selectedDate.getMinutes() < 10
+        ? "0" + selectedDate.getMinutes()
+        : selectedDate.getMinutes();
+    let seconds =
+      selectedDate.getSeconds() === 0
+        ? selectedDate.getSeconds() + "0"
+        : selectedDate.getSeconds() < 10
+        ? "0" + selectedDate.getSeconds()
+        : selectedDate.getSeconds();
+    this.setState({
+      startFormatted: `${selectedDate.getFullYear()}-${months}-${days}T${hours}:${minutes}:${seconds}Z`
+    });
+    //Endformat of next day
+    let nextDay = new Date(date.setDate(date.getDate() + 1));
+    let endMonths =
+      nextDay.getMonth() === 0
+        ? `0${1}`
+        : nextDay.getMonth() + 1 < 10
+        ? "0" + (nextDay.getMonth() + 1)
+        : nextDay.getMonth() + 1;
+    let endDays =
+      nextDay.getDate() === 0
+        ? nextDay.getDate() + "0"
+        : nextDay.getDate() < 10
+        ? "0" + nextDay.getDate()
+        : nextDay.getDate();
+    let endHours =
+      nextDay.getHours() === 0
+        ? nextDay.getHours() + "0"
+        : nextDay.getHours() < 10
+        ? "0" + nextDay.getHours()
+        : nextDay.getHours();
+    let endMinutes =
+      nextDay.getMinutes() === 0
+        ? nextDay.getMinutes() + "0"
+        : nextDay.getMinutes() < 10
+        ? "0" + nextDay.getMinutes()
+        : nextDay.getMinutes();
+    let endSeconds =
+      nextDay.getSeconds() === 0
+        ? nextDay.getSeconds() + "0"
+        : nextDay.getSeconds() < 10
+        ? "0" + nextDay.getSeconds()
+        : nextDay.getSeconds();
+
+    date.getHours() > 15
+      ? this.setState({
+          endFormatted: `${nextDay.getFullYear()}-${endMonths}-${endDays}T${endHours}:${endMinutes}:${endSeconds}Z`
+        })
+      : this.setState({
+          endFormatted: `${date.getFullYear()}-${months}-${days}T${hours +
+            8}:${minutes}:${seconds}Z`
+        });
+  };
+
   onHandleSubmit = (event, makecall) => {
     event.preventDefault();
-    if (this.state.term === "" && this.state.location === "") {
+    const { location, startFormatted, term, endFormatted } = this.state;
+    if (term === "" && location === "" && startFormatted === "") {
+      alert("Must enter in a term, time, and location");
+    } else if (term === "" && location === "" && startFormatted !== "") {
       alert("Must enter in a term and location");
-    } else if (this.state.term === "" && this.state.location !== "") {
+    } else if (startFormatted === "" && location === "" && term !== "") {
+      alert("Must enter in a time and location");
+    } else if (startFormatted === "" && term === "" && location !== "") {
+      alert("Must enter in a time and term");
+    } else if (term === "" && startFormatted !== "" && location !== "") {
       alert("Must enter in a term.");
-    } else if (this.state.location === "" && this.state.term !== "") {
+    } else if (startFormatted === "" && term !== "" && location !== "") {
+      alert("Must enter in a time");
+    } else if (location === "" && startFormatted !== "" && term !== "") {
       alert("Must enter in a location");
     } else {
-      makecall(this.state.term, this.state.location);
+      makecall(term, location, startFormatted, endFormatted);
     }
-    this.setState({ term: "", location: "" });
+    this.setState({ term: "", location: "", startFormatted: "" });
   };
 
   render() {
@@ -50,10 +137,19 @@ class SearchBox extends Component {
                 <input
                   name="location"
                   type="text"
+                  placeholder="ex. 90015, Los Angeles, CA"
                   value={this.state.location}
                   onChange={e => this.updateTextInput(e)}
                 />
                 <br />
+                <label htmlFor="">Date/Time</label>
+                <DatePicker
+                  name="date"
+                  selected={this.state.date}
+                  onChange={this.handleChange}
+                  showTimeSelect
+                  dateFormat="Pp"
+                ></DatePicker>
                 <button onClick={e => this.onHandleSubmit(e, value.makeCall)}>
                   Submit
                 </button>
