@@ -5,25 +5,21 @@ import "./Result.css";
 class Result extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      AddRemove: "+",
-      buttonSwitch: "add"
-    };
-  }
-
-  VenueOrEvent(props) {
-    console.log(props);
-    props.result.type === "venue"
-      ? this.setState({
-          name: props.result.name,
-          location: props.result.location,
-          rating: props.result.rating
+    props.Result.type === "venue"
+      ? (this.state = {
+          AddRemove: "+",
+          buttonSwitch: "add",
+          name: props.Result.name,
+          location: props.Result.location,
+          rating: props.Result.rating
         })
-      : this.setState({
-          name: props.result.Result.name,
-          date: props.result.Result.dates.start.localDate,
-          time: props.result.Result.dates.start.localTime,
-          venue: props.result.Result._embedded.venues[0].name
+      : (this.state = {
+          name: props.Result.name,
+          date: props.Result.dates.start.localDate,
+          time: props.Result.dates.start.localTime,
+          venue: props.Result._embedded.venues[0].name,
+          AddRemove: "+",
+          buttonSwitch: "add"
         });
   }
 
@@ -42,17 +38,15 @@ class Result extends Component {
       <AppContext.Consumer>
         {value => (
           <div className="resultBox">
-            <img src={this.props.result.image_url} className="" alt="" />
+            <img src={this.props.Result.image_url} className="" alt="" />
             <ul>
-              <li>{this.props.result.name}</li>
-              <li>{this.props.result.location.city}</li>
-              <li>{this.props.result.rating}</li>
+              <li>{this.props.Result.name}</li>
+              <li>{this.props.Result.location.city}</li>
+              <li>{this.props.Result.rating}</li>
             </ul>
             <button
               className={this.state.buttonSwitch}
-              onClick={() =>
-                this.changeButton(value.addVenue, value.removeVenue)
-              }
+              onClick={() => this.changeButton(value.addPart, value.removePart)}
             >
               {this.state.AddRemove}
             </button>
@@ -67,16 +61,14 @@ class Result extends Component {
       <AppContext.Consumer>
         {value => (
           <div className="resultBox">
-            <img src={this.props.result.Result.images[0].url} alt="" />
-            <p>{this.props.result.Result.name}</p>
-            <p>{this.props.result.Result.dates.start.localDate}</p>
-            <p>{this.props.result.Result.dates.start.localTime}</p>
-            <p>{this.props.result.Result._embedded.venues[0].name}</p>
+            <img src={this.props.Result.images[0].url} alt="" />
+            <p>{this.props.Result.name}</p>
+            <p>{this.props.Result.dates.start.localDate}</p>
+            <p>{this.props.Result.dates.start.localTime}</p>
+            <p>{this.props.Result._embedded.venues[0].name}</p>
             <button
               className={this.state.buttonSwitch}
-              onClick={() =>
-                this.changeButton(value.addVenue, value.removeVenue)
-              }
+              onClick={() => this.changeButton(value.addPart, value.removePart)}
             >
               {this.state.AddRemove}
             </button>
@@ -87,7 +79,7 @@ class Result extends Component {
   };
 
   render() {
-    return this.props.result.type === "venue"
+    return this.props.Result.type === "venue"
       ? this.venueRender()
       : this.eventRender();
   }

@@ -61,7 +61,7 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.Results);
+    console.log(this.state.dateParts);
     return (
       <AppContext.Provider value={this.state}>
         <div>
