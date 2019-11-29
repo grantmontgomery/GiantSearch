@@ -25,7 +25,11 @@ class Result extends Component {
 
   changeButton = (addfunction, removefunction) => {
     if (this.state.AddRemove === "+") {
-      addfunction(this.state);
+      const newState = {};
+      Object.keys(this.state)
+        .filter(key => key !== "AddRemove" && key !== "buttonSwitch")
+        .forEach(key => (newState[key] = this.state[key]));
+      addfunction(newState);
       this.setState({ AddRemove: "-", buttonSwitch: "remove" });
     } else {
       removefunction(this.state.name);
