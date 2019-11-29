@@ -13,6 +13,16 @@ class Result extends Component {
           location: props.Result.location,
           rating: props.Result.rating
         })
+      : "priceRanges" in props.Result
+      ? (this.state = {
+          name: props.Result.name,
+          date: props.Result.dates.start.localDate,
+          time: props.Result.dates.start.localTime,
+          venue: props.Result._embedded.venues[0].name,
+          price: props.Result.priceRanges[0].min,
+          AddRemove: "+",
+          buttonSwitch: "add"
+        })
       : (this.state = {
           name: props.Result.name,
           date: props.Result.dates.start.localDate,
@@ -59,7 +69,11 @@ class Result extends Component {
       </AppContext.Consumer>
     );
   };
-
+  renderPrice = () => {
+    if ("price" in this.state) {
+      return <p>Starting ticket price: ${this.state.price}.00</p>;
+    }
+  };
   eventRender = () => {
     return (
       <AppContext.Consumer>
@@ -70,6 +84,7 @@ class Result extends Component {
             <p>{this.props.Result.dates.start.localDate}</p>
             <p>{this.props.Result.dates.start.localTime}</p>
             <p>{this.props.Result._embedded.venues[0].name}</p>
+            {this.renderPrice()}
             <button
               className={this.state.buttonSwitch}
               onClick={() => this.changeButton(value.addPart, value.removePart)}
