@@ -16,7 +16,6 @@ class Events extends Component {
   };
 
   render() {
-    console.log(this.props.children);
     return (
       <div className="events">
         <button onClick={e => this.displayNext(e)}></button>
