@@ -1,0 +1,9 @@
+.events {
+  height: 300px;
+  width: 100vw;
+  border: solid black 1px;
+}
+
+.events > li {
+  display: inline-block;
+}

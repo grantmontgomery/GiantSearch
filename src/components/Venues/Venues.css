@@ -1,0 +1,10 @@
+.venues {
+  height: 300px;
+  width: 100vw;
+  border: solid black 1px;
+}
+
+.venues > ul li {
+  display: inline-block;
+  margin: 5px;
+}
