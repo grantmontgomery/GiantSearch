@@ -31,7 +31,6 @@ class Result extends Component {
           AddRemove: "+",
           buttonSwitch: "add"
         });
-    console.log(this.props);
   }
 
   changeButton = (addfunction, removefunction) => {

@@ -5,14 +5,25 @@ import "./Events.css";
 class Events extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      index: 0
+    };
   }
 
-  displayNext = event => {
+  nextItems = event => {
     event.preventDefault();
+    const { eventsDivided } = this.props;
+    this.state.index + 1 < eventsDivided.length
+      ? this.setState(() => ({ index: this.state.index + 1 }))
+      : this.setState(() => ({ index: 0 }));
   };
 
-  displayPrevious = event => {
+  previousItems = event => {
+    const { eventsDivided } = this.props;
     event.preventDefault();
+    this.state.index > 0
+      ? this.setState(() => ({ index: this.state.index - 1 }))
+      : this.setState(() => ({ index: eventsDivided.length - 1 }));
   };
 
   render() {

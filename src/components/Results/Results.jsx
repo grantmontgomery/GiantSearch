@@ -11,11 +11,11 @@ class Results extends Component {
   render() {
     return (
       <div className="resultsBox">
-        <Venues>
+        <Venues venuesDivided={this.props.venuesDivided}>
           {this.props.Results.filter(result => result.type === "venue")}
         </Venues>
         <br />
-        <Events>
+        <Events eventsDivided={this.props.eventsDivided}>
           {this.props.Results.filter(result => result.type === "event")}
         </Events>
       </div>

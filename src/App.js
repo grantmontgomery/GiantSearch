@@ -9,6 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       Results: [],
+      venuesDivided: [],
+      eventsDivided: [],
       dateParts: [],
       makeCall: this.makeCall,
       addPart: this.addPart,
@@ -47,13 +49,36 @@ class App extends Component {
           body: JSON.stringify({ location, startFormatted, endFormatted })
         })
           .then(res => res.json())
-          .then(data =>
+          .then(data => {
+            const venuesDivided = [];
+            const eventsDivided = [];
+            for (let i = 0; i < businesses.length; i += 4) {
+              i + 4 < businesses.length
+                ? venuesDivided.push(businesses.slice(i, i + 4))
+                : venuesDivided.push(businesses.slice(i));
+            }
+            for (let i = 0; i < data._embedded.events.length; i += 4) {
+              i + 4 < data._embedded.events.length
+                ? eventsDivided.push(data._embedded.events.slice(i, i + 4))
+                : eventsDivided.push(data._embedded.events.slice(i));
+            }
             this.setState({
+              venuesDivided: [...venuesDivided],
+              eventsDivided: [...eventsDivided],
               Results: [...businesses, ...data._embedded.events]
-            })
-          )
+            });
+          })
           .catch(err => {
-            this.setState({ Results: [...businesses] });
+            const venuesDivided = [];
+            for (let i = 0; i < businesses.length; i += 4) {
+              i + 4 < businesses.length
+                ? venuesDivided.push(businesses.slice(i, i + 4))
+                : venuesDivided.push(businesses.slice(i));
+            }
+            this.setState({
+              Results: [...businesses],
+              venuesDivided: [...venuesDivided]
+            });
             console.log(err.message);
           });
       })
@@ -61,12 +86,15 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.Results);
     return (
       <AppContext.Provider value={this.state}>
         <div>
           <SearchBox></SearchBox>
-          <Results Results={this.state.Results}></Results>
+          <Results
+            eventsDivided={this.state.eventsDivided}
+            venuesDivided={this.state.venuesDivided}
+            Results={this.state.Results}
+          ></Results>
         </div>
       </AppContext.Provider>
     );
