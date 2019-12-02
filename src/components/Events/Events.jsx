@@ -27,11 +27,15 @@ class Events extends Component {
   };
 
   render() {
+    const { eventsDivided } = this.props;
+    const { index } = this.state;
     return (
       <div className="events">
-        <button onClick={e => this.displayNext(e)}></button>
+        <button className="previous" onClick={e => this.previousItems(e)}>
+          {"<"}
+        </button>
         <ul>
-          {this.props.children.map(result => {
+          {eventsDivided[index].map(result => {
             return (
               <li key={result.id}>
                 <Result Result={result}></Result>
@@ -39,7 +43,9 @@ class Events extends Component {
             );
           })}
         </ul>
-        <button onClick={e => this.displayPrevious(e)}></button>
+        <button className="next" onClick={e => this.nextItems(e)}>
+          {">"}
+        </button>
       </div>
     );
   }

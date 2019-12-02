@@ -8,3 +8,21 @@
   display: inline-block;
   margin: 5px;
 }
+
+.next {
+  height: 200px;
+  width: 50px;
+  float: right;
+  right: 5%;
+  position: absolute;
+  margin: 0;
+}
+
+.previous {
+  height: 200px;
+  position: absolute;
+  width: 50px;
+  float: left;
+  left: 5%;
+  margin: 0;
+}

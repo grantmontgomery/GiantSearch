@@ -26,10 +26,15 @@ class Venues extends Component {
       : this.setState(() => ({ index: venuesDivided.length - 1 }));
   };
   render() {
+    const { venuesDivided } = this.props;
+    const { index } = this.state;
     return (
       <div className="venues">
+        <button className="previous" onClick={e => this.previousItems(e)}>
+          {"<"}
+        </button>
         <ul>
-          {this.props.children.map(result => {
+          {venuesDivided[index].map(result => {
             return (
               <li key={result.id}>
                 <Result Result={result}></Result>
@@ -37,6 +42,9 @@ class Venues extends Component {
             );
           })}
         </ul>
+        <button className="next" onClick={e => this.nextItems(e)}>
+          {">"}
+        </button>
       </div>
     );
   }
