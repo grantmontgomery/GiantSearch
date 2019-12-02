@@ -52,7 +52,6 @@ class Events extends Component {
     }
   };
   render() {
-    console.log(this.props.eventsDivided);
     return <div className="events">{this.eventsRender()}</div>;
   }
 }
