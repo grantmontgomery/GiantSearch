@@ -4,8 +4,9 @@
   border: solid black 1px;
 }
 
-.events > li {
+.events > ul li {
   display: inline-block;
+  margin: 5px;
 }
 
 .next {

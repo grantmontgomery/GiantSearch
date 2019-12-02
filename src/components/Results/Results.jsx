@@ -10,7 +10,7 @@ class Results extends Component {
 
   render() {
     return (
-      <div className="resultsBox">
+      <React.Fragment>
         <Venues venuesDivided={this.props.venuesDivided}>
           {this.props.Results.filter(result => result.type === "venue")}
         </Venues>
@@ -18,7 +18,7 @@ class Results extends Component {
         <Events eventsDivided={this.props.eventsDivided}>
           {this.props.Results.filter(result => result.type === "event")}
         </Events>
-      </div>
+      </React.Fragment>
     );
   }
 }

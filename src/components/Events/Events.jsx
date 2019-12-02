@@ -26,32 +26,33 @@ class Events extends Component {
       : this.setState(() => ({ index: eventsDivided.length - 1 }));
   };
 
-  eventsRender() {
+  eventsRender = () => {
     const { eventsDivided } = this.props;
     const { index } = this.state;
     if (eventsDivided.length > 0) {
+      return (
+        <React.Fragment>
+          <button className="previous" onClick={e => this.previousItems(e)}>
+            {"<"}
+          </button>
+          <ul>
+            {eventsDivided[index].map(result => {
+              return (
+                <li key={result.id}>
+                  <Result Result={result}></Result>
+                </li>
+              );
+            })}
+          </ul>
+          <button className="next" onClick={e => this.nextItems(e)}>
+            {">"}
+          </button>
+        </React.Fragment>
+      );
     }
-    return (
-      <React.Fragment>
-        <button className="previous" onClick={e => this.previousItems(e)}>
-          {"<"}
-        </button>
-        <ul>
-          {eventsDivided[index].map(result => {
-            return (
-              <li key={result.id}>
-                <Result Result={result}></Result>
-              </li>
-            );
-          })}
-        </ul>
-        <button className="next" onClick={e => this.nextItems(e)}>
-          {">"}
-        </button>
-      </React.Fragment>
-    );
-  }
+  };
   render() {
+    console.log(this.props.eventsDivided);
     return <div className="events">{this.eventsRender()}</div>;
   }
 }
