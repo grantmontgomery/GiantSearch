@@ -25,28 +25,34 @@ class Venues extends Component {
       ? this.setState(() => ({ index: this.state.index - 1 }))
       : this.setState(() => ({ index: venuesDivided.length - 1 }));
   };
-  render() {
+  venuesRender = () => {
     const { venuesDivided } = this.props;
     const { index } = this.state;
-    return (
-      <div className="venues">
-        <button className="previous" onClick={e => this.previousItems(e)}>
-          {"<"}
-        </button>
-        <ul>
-          {venuesDivided[index].map(result => {
-            return (
-              <li key={result.id}>
-                <Result Result={result}></Result>
-              </li>
-            );
-          })}
-        </ul>
-        <button className="next" onClick={e => this.nextItems(e)}>
-          {">"}
-        </button>
-      </div>
-    );
+    if (venuesDivided.length > 0) {
+      return (
+        <React.Fragment>
+          <button className="previous" onClick={e => this.previousItems(e)}>
+            {"<"}
+          </button>
+          <ul>
+            {venuesDivided[index].map(result => {
+              return (
+                <li key={result.id}>
+                  <Result Result={result}></Result>
+                </li>
+              );
+            })}
+          </ul>
+          <button className="next" onClick={e => this.nextItems(e)}>
+            {">"}
+          </button>
+        </React.Fragment>
+      );
+    }
+  };
+
+  render() {
+    return <div className="venues">{this.venuesRender()}</div>;
   }
 }
 

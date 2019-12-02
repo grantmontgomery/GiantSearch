@@ -26,11 +26,13 @@ class Events extends Component {
       : this.setState(() => ({ index: eventsDivided.length - 1 }));
   };
 
-  render() {
+  eventsRender() {
     const { eventsDivided } = this.props;
     const { index } = this.state;
+    if (eventsDivided.length > 0) {
+    }
     return (
-      <div className="events">
+      <React.Fragment>
         <button className="previous" onClick={e => this.previousItems(e)}>
           {"<"}
         </button>
@@ -46,8 +48,11 @@ class Events extends Component {
         <button className="next" onClick={e => this.nextItems(e)}>
           {">"}
         </button>
-      </div>
+      </React.Fragment>
     );
+  }
+  render() {
+    return <div className="events">{this.eventsRender()}</div>;
   }
 }
 
