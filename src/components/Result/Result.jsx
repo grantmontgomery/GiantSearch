@@ -10,6 +10,7 @@ class Result extends Component {
           AddRemove: "+",
           buttonSwitch: "add",
           name: props.Result.name,
+          id: props.Result.id,
           location: props.Result.location,
           rating: props.Result.rating
         })
@@ -18,6 +19,7 @@ class Result extends Component {
           name: props.Result.name,
           date: props.Result.dates.start.localDate,
           time: props.Result.dates.start.localTime,
+          id: props.Result.id,
           venue: props.Result._embedded.venues[0].name,
           price: props.Result.priceRanges[0].min,
           AddRemove: "+",
@@ -27,6 +29,7 @@ class Result extends Component {
           name: props.Result.name,
           date: props.Result.dates.start.localDate,
           time: props.Result.dates.start.localTime,
+          id: props.Result.id,
           venue: props.Result._embedded.venues[0].name,
           AddRemove: "+",
           buttonSwitch: "add"
@@ -42,7 +45,7 @@ class Result extends Component {
       addfunction(newState);
       this.setState({ AddRemove: "-", buttonSwitch: "remove" });
     } else {
-      removefunction(this.state.name);
+      removefunction(this.state.id);
       this.setState({ AddRemove: "+", buttonSwitch: "add" });
     }
   };
@@ -52,7 +55,10 @@ class Result extends Component {
       <AppContext.Consumer>
         {value => (
           <div className="resultBox">
-            <img src={this.props.Result.image_url} className="" alt="" />
+            <div className="image-wrapper">
+              <img src={this.props.Result.image_url} className="" alt="" />
+            </div>
+
             <ul>
               <li>{this.props.Result.name}</li>
               <li>{this.props.Result.location.city}</li>
@@ -79,7 +85,9 @@ class Result extends Component {
       <AppContext.Consumer>
         {value => (
           <div className="resultBox">
-            <img src={this.props.Result.images[0].url} alt="" />
+            <div className="image-wrapper">
+              <img src={this.props.Result.images[0].url} alt="" />
+            </div>
             <p>{this.props.Result.name}</p>
             <p>{this.props.Result.dates.start.localDate}</p>
             <p>{this.props.Result.dates.start.localTime}</p>

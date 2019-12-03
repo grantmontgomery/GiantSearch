@@ -12,18 +12,20 @@ class Events extends Component {
 
   nextItems = event => {
     event.preventDefault();
+    let { index } = this.state;
     const { Events } = this.props;
-    this.state.index + 1 < Events.length
-      ? this.setState(() => ({ index: this.state.index + 1 }))
-      : this.setState(() => ({ index: 0 }));
+    this.state.index + 4 <= Events.length - 4
+      ? this.setState(() => ({ index: index + 4 }))
+      : this.setState(() => ({ index: index + (Events.length - 4 - index) }));
   };
 
   previousItems = event => {
-    const { Events } = this.props;
     event.preventDefault();
-    this.state.index > 0
-      ? this.setState(() => ({ index: this.state.index - 1 }))
-      : this.setState(() => ({ index: Events.length - 1 }));
+    let { index } = this.state;
+
+    this.state.index - 4 > 0
+      ? this.setState(() => ({ index: index - 4 }))
+      : this.setState(() => ({ index: 0 }));
   };
 
   eventsRender = () => {

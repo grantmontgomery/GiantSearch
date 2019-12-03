@@ -21,9 +21,9 @@ class App extends Component {
       dateParts: [...this.state.dateParts, part]
     });
   };
-  removePart = name => {
+  removePart = id => {
     this.setState({
-      dateParts: this.state.dateParts.filter(part => part.name !== name)
+      dateParts: this.state.dateParts.filter(part => part.id !== id)
     });
   };
   makeCall = (term, location, startFormatted, endFormatted) => {
@@ -65,6 +65,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.dateParts);
     return (
       <AppContext.Provider value={this.state}>
         <div>

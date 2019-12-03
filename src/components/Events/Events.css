@@ -17,7 +17,7 @@
   display: flex;
   flex-flow: row nowrap;
   position: absolute;
-  transition: 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition: 500ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
   left: 0;
 }
 
@@ -28,6 +28,7 @@
   right: 5%;
   position: absolute;
   margin: 0;
+  z-index: 1;
 }
 
 .previous {
@@ -37,4 +38,5 @@
   float: left;
   left: 5%;
   margin: 0;
+  z-index: 1;
 }

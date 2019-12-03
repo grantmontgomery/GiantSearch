@@ -13,17 +13,18 @@ class Venues extends Component {
   nextItems = event => {
     event.preventDefault();
     const { Venues } = this.props;
-    this.state.index + 1 < Venues.length
-      ? this.setState(() => ({ index: this.state.index + 1 }))
-      : this.setState(() => ({ index: 0 }));
+    let { index } = this.state;
+    index + 4 <= Venues.length - 4
+      ? this.setState(() => ({ index: index + 4 }))
+      : this.setState(() => ({ index: index + (Venues.length - 4 - index) }));
   };
 
   previousItems = event => {
-    const { Venues } = this.props;
     event.preventDefault();
-    this.state.index > 0
-      ? this.setState(() => ({ index: this.state.index - 1 }))
-      : this.setState(() => ({ index: Venues.length - 1 }));
+    let { index } = this.state;
+    index > 0
+      ? this.setState(() => ({ index: index - 4 }))
+      : this.setState(() => ({ index: 0 }));
   };
   venuesRender = () => {
     const { Venues } = this.props;

@@ -1,12 +1,13 @@
 .resultBox {
-  height: fit-content;
-  width: fit-content;
+  height: 250px;
+  width: 200px;
   border: 1px solid black;
+  margin: 5px;
 }
 
-.resultBox img {
-  height: 100px;
-  width: auto;
+.image-wrapper img {
+  width: 200px;
+  height: auto;
 }
 
 .add {
@@ -28,5 +29,14 @@
   color: white;
   margin: 0;
   border: none;
+  text-align: center;
+}
+
+.image-wrapper {
+  width: 200px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  object-fit: cover;
   text-align: center;
 }
