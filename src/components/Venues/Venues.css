@@ -12,6 +12,19 @@
   margin: 5px;
 }
 
+.venues-slider {
+  position: relative;
+  margin: 0 auto;
+}
+
+.venues-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  position: absolute;
+  transition: 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  left: 0;
+}
+
 .next {
   height: 200px;
   width: 50px;

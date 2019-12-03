@@ -11,19 +11,9 @@ class Results extends Component {
   render() {
     return (
       <React.Fragment>
-        <Venues
-          Venues={this.props.Venues}
-          venuesDivided={this.props.venuesDivided}
-        >
-          {this.props.Results.filter(result => result.type === "venue")}
-        </Venues>
+        <Venues Venues={this.props.Venues}></Venues>
         <br />
-        <Events
-          Events={this.props.Events}
-          eventsDivided={this.props.eventsDivided}
-        >
-          {this.props.Results.filter(result => result.type === "event")}
-        </Events>
+        <Events Events={this.props.Events}></Events>
       </React.Fragment>
     );
   }

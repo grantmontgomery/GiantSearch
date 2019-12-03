@@ -8,10 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Results: [],
-      venuesDivided: [],
       Venues: [],
-      eventsDivided: [],
       Events: [],
       dateParts: [],
       makeCall: this.makeCall,
@@ -52,37 +49,14 @@ class App extends Component {
         })
           .then(res => res.json())
           .then(data => {
-            const venuesDivided = [];
-            const eventsDivided = [];
-            for (let i = 0; i < businesses.length; i += 4) {
-              i + 4 < businesses.length
-                ? venuesDivided.push(businesses.slice(i, i + 4))
-                : venuesDivided.push(businesses.slice(i));
-            }
-            for (let i = 0; i < data._embedded.events.length; i += 4) {
-              i + 4 < data._embedded.events.length
-                ? eventsDivided.push(data._embedded.events.slice(i, i + 4))
-                : eventsDivided.push(data._embedded.events.slice(i));
-            }
             this.setState({
-              venuesDivided: [...venuesDivided],
-              eventsDivided: [...eventsDivided],
               Venues: [...businesses],
-              Events: [...data._embedded.events],
-              Results: [...businesses, ...data._embedded.events]
+              Events: [...data._embedded.events]
             });
           })
           .catch(err => {
-            const venuesDivided = [];
-            for (let i = 0; i < businesses.length; i += 4) {
-              i + 4 < businesses.length
-                ? venuesDivided.push(businesses.slice(i, i + 4))
-                : venuesDivided.push(businesses.slice(i));
-            }
             this.setState({
-              Results: [...businesses],
-              Venues: [...businesses],
-              venuesDivided: [...venuesDivided]
+              Venues: [...businesses]
             });
             console.log(err.message);
           });
@@ -91,15 +65,11 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.dateParts);
     return (
       <AppContext.Provider value={this.state}>
         <div>
           <SearchBox></SearchBox>
           <Results
-            eventsDivided={this.state.eventsDivided}
-            venuesDivided={this.state.venuesDivided}
-            Results={this.state.Results}
             Events={this.state.Events}
             Venues={this.state.Venues}
           ></Results>

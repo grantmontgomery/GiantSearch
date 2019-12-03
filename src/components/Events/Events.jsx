@@ -32,7 +32,12 @@ class Events extends Component {
     if (Events.length > 0) {
       return (
         <div className="events-slider">
-          <div className="events-wrapper">
+          <div
+            className="events-wrapper"
+            style={{
+              transform: `translateX(-${index * (100 / Events.length)}%)`
+            }}
+          >
             {Events.map(result => {
               return <Result key={result.id} Result={result}></Result>;
             })}
