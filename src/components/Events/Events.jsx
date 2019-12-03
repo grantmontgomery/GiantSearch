@@ -12,47 +12,48 @@ class Events extends Component {
 
   nextItems = event => {
     event.preventDefault();
-    const { eventsDivided } = this.props;
-    this.state.index + 1 < eventsDivided.length
+    const { Events } = this.props;
+    this.state.index + 1 < Events.length
       ? this.setState(() => ({ index: this.state.index + 1 }))
       : this.setState(() => ({ index: 0 }));
   };
 
   previousItems = event => {
-    const { eventsDivided } = this.props;
+    const { Events } = this.props;
     event.preventDefault();
     this.state.index > 0
       ? this.setState(() => ({ index: this.state.index - 1 }))
-      : this.setState(() => ({ index: eventsDivided.length - 1 }));
+      : this.setState(() => ({ index: Events.length - 1 }));
   };
 
   eventsRender = () => {
-    const { eventsDivided } = this.props;
+    const { Events } = this.props;
     const { index } = this.state;
-    if (eventsDivided.length > 0) {
+    if (Events.length > 0) {
       return (
-        <React.Fragment>
-          <button className="previous" onClick={e => this.previousItems(e)}>
-            {"<"}
-          </button>
-          <ul>
-            {eventsDivided[index].map(result => {
-              return (
-                <li key={result.id}>
-                  <Result Result={result}></Result>
-                </li>
-              );
+        <div className="events-slider">
+          <div className="events-wrapper">
+            {Events.map(result => {
+              return <Result key={result.id} Result={result}></Result>;
             })}
-          </ul>
-          <button className="next" onClick={e => this.nextItems(e)}>
-            {">"}
-          </button>
-        </React.Fragment>
+          </div>
+        </div>
       );
     }
   };
   render() {
-    return <div className="events">{this.eventsRender()}</div>;
+    return (
+      <div className="events">
+        {" "}
+        <button className="previous" onClick={e => this.previousItems(e)}>
+          {"<"}
+        </button>
+        {this.eventsRender()}{" "}
+        <button className="next" onClick={e => this.nextItems(e)}>
+          {">"}
+        </button>
+      </div>
+    );
   }
 }
 

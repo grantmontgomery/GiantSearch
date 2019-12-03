@@ -12,30 +12,30 @@ class Venues extends Component {
 
   nextItems = event => {
     event.preventDefault();
-    const { venuesDivided } = this.props;
-    this.state.index + 1 < venuesDivided.length
+    const { Venues } = this.props;
+    this.state.index + 1 < Venues.length
       ? this.setState(() => ({ index: this.state.index + 1 }))
       : this.setState(() => ({ index: 0 }));
   };
 
   previousItems = event => {
-    const { venuesDivided } = this.props;
+    const { Venues } = this.props;
     event.preventDefault();
     this.state.index > 0
       ? this.setState(() => ({ index: this.state.index - 1 }))
-      : this.setState(() => ({ index: venuesDivided.length - 1 }));
+      : this.setState(() => ({ index: Venues.length - 1 }));
   };
   venuesRender = () => {
-    const { venuesDivided } = this.props;
+    const { Venues } = this.props;
     const { index } = this.state;
-    if (venuesDivided.length > 0) {
+    if (Venues.length > 0) {
       return (
         <React.Fragment>
           <button className="previous" onClick={e => this.previousItems(e)}>
             {"<"}
           </button>
           <ul>
-            {venuesDivided[index].map(result => {
+            {Venues.map(result => {
               return (
                 <li key={result.id}>
                   <Result Result={result}></Result>

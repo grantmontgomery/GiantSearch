@@ -10,7 +10,9 @@ class App extends Component {
     this.state = {
       Results: [],
       venuesDivided: [],
+      Venues: [],
       eventsDivided: [],
+      Events: [],
       dateParts: [],
       makeCall: this.makeCall,
       addPart: this.addPart,
@@ -65,6 +67,8 @@ class App extends Component {
             this.setState({
               venuesDivided: [...venuesDivided],
               eventsDivided: [...eventsDivided],
+              Venues: [...businesses],
+              Events: [...data._embedded.events],
               Results: [...businesses, ...data._embedded.events]
             });
           })
@@ -77,6 +81,7 @@ class App extends Component {
             }
             this.setState({
               Results: [...businesses],
+              Venues: [...businesses],
               venuesDivided: [...venuesDivided]
             });
             console.log(err.message);
@@ -95,6 +100,8 @@ class App extends Component {
             eventsDivided={this.state.eventsDivided}
             venuesDivided={this.state.venuesDivided}
             Results={this.state.Results}
+            Events={this.state.Events}
+            Venues={this.state.Venues}
           ></Results>
         </div>
       </AppContext.Provider>

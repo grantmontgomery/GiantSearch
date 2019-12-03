@@ -1,7 +1,10 @@
 .venues {
   height: 300px;
-  width: 100vw;
+  width: 80vw;
   border: solid black 1px;
+  margin: auto;
+  overflow: hidden;
+  object-fit: cover;
 }
 
 .venues > ul li {
