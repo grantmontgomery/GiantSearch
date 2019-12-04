@@ -67,12 +67,13 @@ class Result extends Component {
             >
               {this.state.AddRemove}
             </button>
-
-            <ul>
-              <li>{this.props.Result.name}</li>
-              <li>{this.props.Result.location.city}</li>
-              <li>{this.props.Result.rating}</li>
-            </ul>
+            <div className="text-wrapper">
+              <ul>
+                <li>{this.props.Result.name}</li>
+                <li>{this.props.Result.location.city}</li>
+                <li>{this.props.Result.rating}</li>
+              </ul>
+            </div>
           </div>
         )}
       </AppContext.Consumer>
@@ -80,7 +81,7 @@ class Result extends Component {
   };
   renderPrice = () => {
     if ("price" in this.state) {
-      return <p>Starting at: ${this.state.price}.00</p>;
+      return <li>Starting at: ${this.state.price}.00</li>;
     }
   };
   eventRender = () => {
@@ -97,11 +98,15 @@ class Result extends Component {
             >
               {this.state.AddRemove}
             </button>
-            <p>{this.props.Result.name}</p>
-            <p>{this.props.Result.dates.start.localDate}</p>
-            <p>{this.props.Result.dates.start.localTime}</p>
-            <p>{this.props.Result._embedded.venues[0].name}</p>
-            {this.renderPrice()}
+            <div className="text-wrapper">
+              <ul>
+                <li>{this.props.Result.name}</li>
+                <li>{this.props.Result.dates.start.localDate}</li>
+                <li>{this.props.Result.dates.start.localTime}</li>
+                <li>{this.props.Result._embedded.venues[0].name}</li>
+                {this.renderPrice()}
+              </ul>
+            </div>
           </div>
         )}
       </AppContext.Consumer>
