@@ -16,7 +16,7 @@
   flex-flow: column nowrap;
   position: relative;
   float: left;
-  left: -30px;
+  left: 5px;
   padding: 0;
 }
 
@@ -28,7 +28,8 @@
   border: 1px solid black;
   float: right;
   right: 0;
-  overflow: hidden;
+  overflow: auto;
+  direction: rtl;
 }
 
 .parts-wrapper > ul li {

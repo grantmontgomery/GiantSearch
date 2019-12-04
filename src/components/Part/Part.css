@@ -26,11 +26,11 @@
 }
 
 .part-text-wrapper {
-  position: re;
+  position: relative;
   text-align: center;
   float: left;
+  margin-left: 5px;
   text-align: left;
-  right: 0;
   overflow: hidden;
 }
 
@@ -42,4 +42,15 @@
 .part-text-wrapper > ul li {
   list-style-type: none;
   font-size: small;
+}
+
+.remove-part {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  float: right;
+  right: 5px;
+  top: 10px;
+  color: white;
+  border-radius: 15px;
 }
