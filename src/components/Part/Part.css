@@ -1,9 +1,10 @@
 .part-wrapper {
   height: 50px;
-  width: 175px;
+  width: 225px;
   border: solid 1px black;
   margin: 5px;
   float: left;
+  position: relative;
   left: 0;
 }
 
@@ -25,5 +26,20 @@
 }
 
 .part-text-wrapper {
+  position: re;
   text-align: center;
+  float: left;
+  text-align: left;
+  right: 0;
+  overflow: hidden;
+}
+
+.part-text-wrapper span {
+  list-style-type: none;
+  font-size: small;
+}
+
+.part-text-wrapper > ul li {
+  list-style-type: none;
+  font-size: small;
 }

@@ -21,13 +21,15 @@ class Parts extends Component {
     if (dropdown === false) {
       return (
         <div className="parts-dropdown">
-          <ul>
-            {list.Parts.map(part => (
-              <li>
-                <Part Part={part}></Part>
-              </li>
-            ))}
-          </ul>
+          <div className="parts-wrapper">
+            <ul>
+              {list.Parts.map(part => (
+                <li>
+                  <Part Part={part}></Part>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       );
     } else {

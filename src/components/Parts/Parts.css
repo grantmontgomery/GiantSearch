@@ -9,17 +9,28 @@
   z-index: 1;
 }
 
+.parts-wrapper {
+  text-align: left;
+  justify-content: left;
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  float: left;
+  left: -30px;
+  padding: 0;
+}
+
 .parts-dropdown {
   height: 300px;
   top: 52px;
   position: absolute;
-  width: 200px;
+  width: 250px;
   border: 1px solid black;
   float: right;
   right: 0;
   overflow: hidden;
 }
 
-.parts-dropdown > ul li {
+.parts-wrapper > ul li {
   list-style: none;
 }

@@ -13,6 +13,7 @@ class Result extends Component {
           image: props.Result.image_url,
           id: props.Result.id,
           location: props.Result.location,
+          type: props.Result.type,
           rating: props.Result.rating
         })
       : "priceRanges" in props.Result
@@ -21,6 +22,7 @@ class Result extends Component {
           date: props.Result.dates.start.localDate,
           time: props.Result.dates.start.localTime,
           id: props.Result.id,
+          type: props.Result.type,
           image: props.Result.images[0].url,
           venue: props.Result._embedded.venues[0].name,
           price: props.Result.priceRanges[0].min,
@@ -33,6 +35,7 @@ class Result extends Component {
           time: props.Result.dates.start.localTime,
           id: props.Result.id,
           image: props.Result.images[0].url,
+          type: props.Result.type,
           venue: props.Result._embedded.venues[0].name,
           AddRemove: "+",
           buttonSwitch: "add"
