@@ -1,14 +1,29 @@
 .part-wrapper {
+  height: 50px;
+  width: 175px;
+  border: solid 1px black;
+  margin: 5px;
+  float: left;
+  left: 0;
 }
 
 .part-image-wrapper {
-  height: 25px;
+  height: 50px;
   width: 50px;
   overflow: hidden;
   object-fit: contain;
+  float: left;
+  margin-top: auto;
+  margin-bottom: auto;
+  left: 0;
+  position: relative;
 }
 
 .part-image-wrapper > img {
-  height: 50px;
-  width: auto;
+  height: auto;
+  width: 50px;
+}
+
+.part-text-wrapper {
+  text-align: center;
 }

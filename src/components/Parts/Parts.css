@@ -6,12 +6,18 @@
   height: 50px;
   width: 50px;
   cursor: pointer;
+  z-index: 1;
 }
 
 .parts-dropdown {
   height: 300px;
-  width: 100px;
+  top: 52px;
+  position: absolute;
+  width: 200px;
   border: 1px solid black;
+  float: right;
+  right: 0;
+  overflow: hidden;
 }
 
 .parts-dropdown > ul li {

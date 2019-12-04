@@ -5,7 +5,7 @@ import "./Parts.css";
 
 class Parts extends Component {
   state = {
-    dropdown: false
+    dropdown: true
   };
 
   triggerDropdown = event => {

@@ -9,6 +9,7 @@ class Part extends Component {
         <div className="part-image-wrapper">
           <img src={this.props.Part.image} alt="" />
         </div>
+        <span>{this.props.Part.name}</span>
       </div>
     );
   }
