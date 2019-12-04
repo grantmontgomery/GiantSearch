@@ -1,0 +1,14 @@
+.part-wrapper {
+}
+
+.part-image-wrapper {
+  height: 25px;
+  width: 50px;
+  overflow: hidden;
+  object-fit: contain;
+}
+
+.part-image-wrapper > img {
+  height: 50px;
+  width: auto;
+}

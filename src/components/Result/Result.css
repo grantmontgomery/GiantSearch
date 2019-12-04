@@ -13,6 +13,7 @@
 
 .add {
   border-radius: 6px;
+  cursor: pointer;
   position: relative;
   background: green;
   height: 30px;
@@ -32,6 +33,8 @@
   background: red;
   position: relative;
   float: right;
+  cursor: pointer;
+
   right: 5px;
   height: 30px;
   width: 30px;
