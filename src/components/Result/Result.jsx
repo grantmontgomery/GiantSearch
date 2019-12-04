@@ -10,6 +10,7 @@ class Result extends Component {
           AddRemove: "+",
           buttonSwitch: "add",
           name: props.Result.name,
+          image: props.Result.image_url,
           id: props.Result.id,
           location: props.Result.location,
           rating: props.Result.rating
@@ -20,6 +21,7 @@ class Result extends Component {
           date: props.Result.dates.start.localDate,
           time: props.Result.dates.start.localTime,
           id: props.Result.id,
+          image: props.Result.images[0].url,
           venue: props.Result._embedded.venues[0].name,
           price: props.Result.priceRanges[0].min,
           AddRemove: "+",
@@ -30,6 +32,7 @@ class Result extends Component {
           date: props.Result.dates.start.localDate,
           time: props.Result.dates.start.localTime,
           id: props.Result.id,
+          image: props.Result.images[0].url,
           venue: props.Result._embedded.venues[0].name,
           AddRemove: "+",
           buttonSwitch: "add"

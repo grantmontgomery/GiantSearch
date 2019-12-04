@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       Venues: [],
       Events: [],
-      dateParts: [],
+      Parts: [],
       makeCall: this.makeCall,
       addPart: this.addPart,
       removePart: this.removePart
@@ -19,12 +19,12 @@ class App extends Component {
   }
   addPart = part => {
     this.setState({
-      dateParts: [...this.state.dateParts, part]
+      Parts: [...this.state.Parts, part]
     });
   };
   removePart = id => {
     this.setState({
-      dateParts: this.state.dateParts.filter(part => part.id !== id)
+      Parts: this.state.Parts.filter(part => part.id !== id)
     });
   };
   makeCall = (term, location, startFormatted, endFormatted) => {
@@ -66,7 +66,7 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.dateParts);
+    console.log(this.state.Parts);
     return (
       <AppContext.Provider value={this.state}>
         <div>
