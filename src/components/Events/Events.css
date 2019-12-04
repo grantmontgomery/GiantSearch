@@ -6,6 +6,7 @@
   border: solid black 1px;
   overflow: hidden;
   object-fit: cover;
+  padding-top: auto;
 }
 
 .events-slider {

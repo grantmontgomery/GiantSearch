@@ -58,18 +58,18 @@ class Result extends Component {
             <div className="image-wrapper">
               <img src={this.props.Result.image_url} className="" alt="" />
             </div>
-
-            <ul>
-              <li>{this.props.Result.name}</li>
-              <li>{this.props.Result.location.city}</li>
-              <li>{this.props.Result.rating}</li>
-            </ul>
             <button
               className={this.state.buttonSwitch}
               onClick={() => this.changeButton(value.addPart, value.removePart)}
             >
               {this.state.AddRemove}
             </button>
+
+            <ul>
+              <li>{this.props.Result.name}</li>
+              <li>{this.props.Result.location.city}</li>
+              <li>{this.props.Result.rating}</li>
+            </ul>
           </div>
         )}
       </AppContext.Consumer>
@@ -77,7 +77,7 @@ class Result extends Component {
   };
   renderPrice = () => {
     if ("price" in this.state) {
-      return <p>Starting ticket price: ${this.state.price}.00</p>;
+      return <p>Starting at: ${this.state.price}.00</p>;
     }
   };
   eventRender = () => {
@@ -88,17 +88,17 @@ class Result extends Component {
             <div className="image-wrapper">
               <img src={this.props.Result.images[0].url} alt="" />
             </div>
-            <p>{this.props.Result.name}</p>
-            <p>{this.props.Result.dates.start.localDate}</p>
-            <p>{this.props.Result.dates.start.localTime}</p>
-            <p>{this.props.Result._embedded.venues[0].name}</p>
-            {this.renderPrice()}
             <button
               className={this.state.buttonSwitch}
               onClick={() => this.changeButton(value.addPart, value.removePart)}
             >
               {this.state.AddRemove}
             </button>
+            <p>{this.props.Result.name}</p>
+            <p>{this.props.Result.dates.start.localDate}</p>
+            <p>{this.props.Result.dates.start.localTime}</p>
+            <p>{this.props.Result._embedded.venues[0].name}</p>
+            {this.renderPrice()}
           </div>
         )}
       </AppContext.Consumer>

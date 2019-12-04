@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { SearchBox } from "./components";
 import { Results } from "./components";
 import { AppContext } from "./AppContext";
+import { Parts } from "./components";
 require("dotenv").config();
 
 class App extends Component {
@@ -69,6 +70,7 @@ class App extends Component {
     return (
       <AppContext.Provider value={this.state}>
         <div>
+          <Parts></Parts>
           <SearchBox></SearchBox>
           <Results
             Events={this.state.Events}
