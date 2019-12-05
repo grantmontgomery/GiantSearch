@@ -37,16 +37,23 @@ class Parts extends Component {
     }
   };
 
+  renderPartsNotifications = list => {
+    if (list.length > 0) {
+      return <div className="parts-notifications">{list.length}</div>;
+    } else if (list.length > 10) {
+      return <div className="parts-notificaitons">10+</div>;
+    }
+  };
+
   render() {
     console.log(this.state.dropdown);
     return (
       <AppContext.Consumer>
         {value => (
           <React.Fragment>
-            <div
-              className="parts-box"
-              onClick={e => this.triggerDropdown(e)}
-            ></div>
+            <div className="parts-box" onClick={e => this.triggerDropdown(e)}>
+              {this.renderPartsNotifications(value.Parts)}
+            </div>
             {this.renderDropdown(value)}
           </React.Fragment>
         )}

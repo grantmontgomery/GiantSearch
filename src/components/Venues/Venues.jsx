@@ -32,6 +32,9 @@ class Venues extends Component {
     if (Venues.length > 0) {
       return (
         <div className="venues-slider">
+          <button id="previous" onClick={e => this.previousItems(e)}>
+            {"<"}
+          </button>
           <div
             className="venues-wrapper"
             style={{
@@ -42,6 +45,9 @@ class Venues extends Component {
               return <Result key={result.id} Result={result}></Result>;
             })}
           </div>
+          <button id="next" onClick={e => this.nextItems(e)}>
+            {">"}
+          </button>
         </div>
       );
     }
@@ -49,17 +55,7 @@ class Venues extends Component {
 
   render() {
     console.log(this.state.index);
-    return (
-      <div className="venues">
-        <button className="previous" onClick={e => this.previousItems(e)}>
-          {"<"}
-        </button>
-        {this.venuesRender()}
-        <button className="next" onClick={e => this.nextItems(e)}>
-          {">"}
-        </button>
-      </div>
-    );
+    return <div className="venues">{this.venuesRender()}</div>;
   }
 }
 

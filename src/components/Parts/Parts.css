@@ -19,6 +19,14 @@
   left: 5px;
   padding: 0;
 }
+.parts-notifications {
+  background: red;
+  color: white;
+  height: 30px;
+  width: 40px;
+  border-radius: 20px;
+  text-align: center;
+}
 
 .parts-dropdown {
   height: 300px;

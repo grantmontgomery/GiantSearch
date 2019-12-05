@@ -72,7 +72,11 @@ class Result extends Component {
             </button>
             <div className="text-wrapper">
               <ul>
-                <li>{this.props.Result.name}</li>
+                <li>
+                  <a href={this.props.Result.url} target="_blank">
+                    {this.props.Result.name}
+                  </a>
+                </li>
                 <li>{this.props.Result.location.city}</li>
                 <li>{this.props.Result.rating}</li>
               </ul>
@@ -103,7 +107,11 @@ class Result extends Component {
             </button>
             <div className="text-wrapper">
               <ul>
-                <li>{this.props.Result.name}</li>
+                <li>
+                  <a href={this.props.Result.url} target="_blank">
+                    {this.props.Result.name}
+                  </a>
+                </li>
                 <li>{this.props.Result.dates.start.localDate}</li>
                 <li>{this.props.Result.dates.start.localTime}</li>
                 <li>{this.props.Result._embedded.venues[0].name}</li>
