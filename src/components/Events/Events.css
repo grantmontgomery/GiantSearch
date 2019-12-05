@@ -22,24 +22,36 @@
   left: 0;
 }
 
-.next {
-  height: 200px;
-  width: 50px;
-  float: right;
-  right: 5%;
+#next {
+  height: 300px;
+  width: 75px;
   position: absolute;
+  float: right;
+  right: 0;
+  opacity: 0;
   margin: 0;
   z-index: 1;
-  cursor: pointer;
+  transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.previous {
-  height: 200px;
+#previous {
+  height: 300px;
   position: absolute;
-  width: 50px;
   float: left;
-  left: 5%;
+  width: 75px;
+  opacity: 0;
+  left: 0;
   margin: 0;
   z-index: 1;
-  cursor: pointer;
+  transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#next:hover {
+  opacity: 0.5;
+  transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#previous:hover {
+  opacity: 0.5;
+  transition: 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }

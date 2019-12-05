@@ -34,6 +34,9 @@ class Events extends Component {
     if (Events.length > 0) {
       return (
         <div className="events-slider">
+          <button id="previous" onClick={e => this.previousItems(e)}>
+            {"<"}
+          </button>
           <div
             className="events-wrapper"
             style={{
@@ -44,23 +47,15 @@ class Events extends Component {
               return <Result key={result.id} Result={result}></Result>;
             })}
           </div>
+          <button id="next" onClick={e => this.nextItems(e)}>
+            {">"}
+          </button>
         </div>
       );
     }
   };
   render() {
-    return (
-      <div className="events">
-        {" "}
-        <button className="previous" onClick={e => this.previousItems(e)}>
-          {"<"}
-        </button>
-        {this.eventsRender()}{" "}
-        <button className="next" onClick={e => this.nextItems(e)}>
-          {">"}
-        </button>
-      </div>
-    );
+    return <div className="events"> {this.eventsRender()} </div>;
   }
 }
 

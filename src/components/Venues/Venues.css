@@ -26,28 +26,6 @@
 
 #next {
   height: 300px;
-  width: 50px;
-  position: absolute;
-  float: right;
-  right: 0;
-  opacity: 0;
-  margin: 0;
-  z-index: 1;
-}
-
-#previous {
-  height: 300px;
-  position: absolute;
-  float: left;
-  width: 50px;
-  opacity: 0;
-  left: 0;
-  margin: 0;
-  z-index: 1;
-}
-
-#next {
-  height: 300px;
   width: 75px;
   position: absolute;
   float: right;
