@@ -24,7 +24,7 @@ class Parts extends Component {
           <div className="parts-wrapper">
             <ul>
               {list.Parts.map(part => (
-                <li>
+                <li className="show">
                   <Part Part={part}></Part>
                 </li>
               ))}
