@@ -29,11 +29,18 @@
   width: 75px;
   position: absolute;
   float: right;
+  cursor: pointer;
   right: 0;
+  border: 0;
   opacity: 0;
+  background: rgba(150, 200, 150, 0);
   margin: 0;
   z-index: 1;
   transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#next:focus {
+  outline: 0;
 }
 
 #previous {
@@ -41,19 +48,28 @@
   position: absolute;
   float: left;
   width: 75px;
+  background: rgba(150, 200, 150, 0);
+  border: 0;
   opacity: 0;
   left: 0;
   margin: 0;
   z-index: 1;
+  cursor: pointer;
   transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#previous:focus {
+  outline: 0;
 }
 
 #next:hover {
-  opacity: 0.5;
+  opacity: 1;
   transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: rgba(150, 200, 150, 0.75);
 }
 
 #previous:hover {
-  opacity: 0.5;
+  background: rgba(150, 200, 150, 0.75);
+  opacity: 1;
   transition: 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }

@@ -38,6 +38,13 @@
   list-style-type: none;
   font-size: small;
 }
+/* .slide-fade li {
+  transition: all 0.4s ease-out;
+  opacity: 0;
+}
+.slide-fade li.show {
+  opacity: 1;
+} */
 
 .part-text-wrapper > ul li {
   list-style-type: none;
@@ -47,7 +54,7 @@
 .remove-part {
   height: 30px;
   width: 30px;
-  position: relative;
+  position: absolute;
   float: right;
   right: 5px;
   top: 10px;
