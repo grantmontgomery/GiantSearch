@@ -20,7 +20,7 @@ class Parts extends Component {
     let { dropdown } = this.state;
     if (dropdown === false) {
       return (
-        <div className="parts-dropdown">
+        <div className="parts-dropdown scrollbar">
           <div className="parts-wrapper">
             <ul>
               {list.Parts.map(part => (

@@ -25,7 +25,9 @@ class Part extends Component {
                 <button
                   className="remove-part"
                   onClick={() => value.removePart(this.props.Part.id)}
-                ></button>
+                >
+                  {"-"}
+                </button>
               </div>
             );
           }}
@@ -33,14 +35,30 @@ class Part extends Component {
       );
     } else {
       return (
-        <div className="part-wrapper">
-          <div className="part-image-wrapper">
-            <img src={this.props.Part.image} alt="" />
-          </div>
-          <div className="part-text-wrapper">
-            <span>{this.props.Part.name}</span>
-          </div>
-        </div>
+        <AppContext.Consumer>
+          {value => {
+            return (
+              <div className="part-wrapper">
+                <div className="part-image-wrapper">
+                  <img src={this.props.Part.images[0].url} alt="" />
+                </div>
+                <div className="part-text-wrapper">
+                  <span>{this.props.Part.name}</span>
+                  <br />
+                  <span>{this.props.Part._embedded.venues[0].name}</span>
+                  <br />
+                  <span>{`${this.props.Part.dates.start.localDate} ${this.props.Part.dates.start.localTime}`}</span>
+                </div>
+                <button
+                  className="remove-part"
+                  onClick={() => value.removePart(this.props.Part.id)}
+                >
+                  {"-"}
+                </button>
+              </div>
+            );
+          }}
+        </AppContext.Consumer>
       );
     }
   };

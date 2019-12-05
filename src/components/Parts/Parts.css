@@ -28,7 +28,7 @@
   border: 1px solid black;
   float: right;
   right: 0;
-  overflow: auto;
+  overflow-y: scroll;
   direction: rtl;
 }
 
