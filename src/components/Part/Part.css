@@ -14,14 +14,13 @@
   overflow: hidden;
   object-fit: contain;
   float: left;
-  margin-top: auto;
-  margin-bottom: auto;
   left: 0;
   position: relative;
 }
 
 .part-image-wrapper > img {
   height: auto;
+  position: relative;
   width: 50px;
 }
 

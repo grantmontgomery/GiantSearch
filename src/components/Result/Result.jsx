@@ -14,6 +14,7 @@ class Result extends Component {
           id: props.Result.id,
           location: props.Result.location,
           type: props.Result.type,
+          price: props.Result.price,
           rating: props.Result.rating
         })
       : "priceRanges" in props.Result
@@ -79,6 +80,7 @@ class Result extends Component {
                 </li>
                 <li>{this.props.Result.location.city}</li>
                 <li>{this.props.Result.rating}</li>
+                <li>{this.props.Result.price}</li>
               </ul>
             </div>
           </div>

@@ -40,14 +40,14 @@ class Part extends Component {
             return (
               <div className="part-wrapper">
                 <div className="part-image-wrapper">
-                  <img src={this.props.Part.images[0].url} alt="" />
+                  <img src={this.props.Part.image} alt="" />
                 </div>
                 <div className="part-text-wrapper">
                   <span>{this.props.Part.name}</span>
                   <br />
-                  <span>{this.props.Part._embedded.venues[0].name}</span>
+                  <span>{this.props.Part.venue}</span>
                   <br />
-                  <span>{`${this.props.Part.dates.start.localDate} ${this.props.Part.dates.start.localTime}`}</span>
+                  <span>{`${this.props.Part.date} ${this.props.Part.time}`}</span>
                 </div>
                 <button
                   className="remove-part"
