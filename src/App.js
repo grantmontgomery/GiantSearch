@@ -27,6 +27,7 @@ class App extends Component {
       Parts: this.state.Parts.filter(part => part.id !== id)
     });
   };
+
   makeCall = (term, location, startFormatted, endFormatted) => {
     fetch("http://localhost:5000/yelpSearch", {
       headers: {

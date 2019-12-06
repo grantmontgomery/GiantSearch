@@ -40,13 +40,23 @@
   direction: rtl;
 }
 
-.parts-wrapper > ul li {
+.parts-wrapper > ul li.show {
   list-style: none;
-  transition: 500ms cubic-bezier(0.215, 0.61, 0.355, 1);
-  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 300ms;
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 
-.parts-wrapper > ul .show {
-  opacity: 1;
-  transition: 500ms cubic-bezier(0.215, 0.61, 0.355, 1);
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    top: 500px;
+  }
+  75% {
+    opacity: 0.5;
+    top: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
