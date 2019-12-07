@@ -24,7 +24,7 @@ class Parts extends Component {
           <div className="parts-wrapper">
             <ul>
               {list.Parts.map(part => (
-                <li className="show">
+                <li>
                   <Part Part={part}></Part>
                 </li>
               ))}
@@ -46,7 +46,6 @@ class Parts extends Component {
   };
 
   render() {
-    console.log(this.state.dropdown);
     return (
       <AppContext.Consumer>
         {value => (

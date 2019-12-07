@@ -54,7 +54,6 @@ class Venues extends Component {
   };
 
   render() {
-    console.log(this.state.index);
     return <div className="venues">{this.venuesRender()}</div>;
   }
 }

@@ -43,11 +43,11 @@ class Part extends Component {
                   <img src={this.props.Part.image} alt="" />
                 </div>
                 <div className="part-text-wrapper">
-                  <span>{this.props.Part.name}</span>
+                  <span className="title">{this.props.Part.name}</span>
                   <br />
-                  <span>{this.props.Part.venue}</span>
+                  <span className="details">{this.props.Part.venue}</span>
                   <br />
-                  <span>{`${this.props.Part.date} ${this.props.Part.time}`}</span>
+                  <span className="details">{`${this.props.Part.date} ${this.props.Part.time}`}</span>
                 </div>
                 <button
                   className="remove-part"
