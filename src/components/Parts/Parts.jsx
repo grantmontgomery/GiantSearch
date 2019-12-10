@@ -56,13 +56,14 @@ class Parts extends Component {
         <div className="parts-box" onClick={e => this.triggerDropdown(e)}>
           {this.renderPartsNotifications(Parts)}
         </div>
-        <TransitionGroup>
-          <div className="parts-dropdown scrollbar">
-            <div className="parts-wrapper">
-              <ul>{this.applyTransitions(Parts)}</ul>
-            </div>
+
+        <div className="parts-dropdown scrollbar">
+          <div className="parts-wrapper">
+            <ul>
+              <TransitionGroup>{this.applyTransitions(Parts)}</TransitionGroup>
+            </ul>
           </div>
-        </TransitionGroup>
+        </div>
       </React.Fragment>
     );
   }
