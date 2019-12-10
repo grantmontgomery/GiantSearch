@@ -27,6 +27,24 @@
   padding: 0;
 }
 
+.parts-wrapper li {
+  height: 50px;
+  width: 225px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.parts-wrapper li:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+  -webkit-transition: 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 .parts-notifications {
   background: red;
   color: white;
@@ -47,13 +65,6 @@
   overflow-y: scroll;
   overflow-x: hidden;
   direction: rtl;
-}
-
-.parts-wrapper > ul li:hover {
-  -webkit-transform: scale(1.01);
-          transform: scale(1.01);
-  -webkit-transition: 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transition: 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @-webkit-keyframes slideOut {
@@ -80,7 +91,7 @@
 
 .slide-transition-enter {
   opacity: 0;
-  max-height: 40px;
+  max-height: 50px;
   -webkit-transform: translate(-300px);
           transform: translate(-300px);
   -webkit-transition: all 300ms ease-in-out;
@@ -91,14 +102,14 @@
   -webkit-transform: translate(0);
           transform: translate(0);
   opacity: 1;
-  max-height: 40px;
+  max-height: 50px;
 }
 
 .slide-transition-exit {
   opacity: 1;
-  max-height: 40px;
-  -webkit-transition: all 400ms ease-in-out;
-  transition: all 400ms ease-in-out;
+  max-height: 50px;
+  -webkit-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
 }
 
 .slide-transition-exit.slide-transition-exit-active {
@@ -106,8 +117,8 @@
           animation-name: slideOut;
   -webkit-animation-duration: 400ms;
           animation-duration: 400ms;
-  -webkit-transition: 300ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
-  transition: 300ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
+  -webkit-transition: 350ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
+  transition: 350ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
   opacity: 0;
   max-height: 0;
 }

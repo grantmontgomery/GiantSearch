@@ -18,7 +18,7 @@ class Parts extends Component {
   };
   applyTransitions = array => {
     return array.map(part => (
-      <CSSTransition key={part.id} timeout={300} classNames="slide-transition">
+      <CSSTransition key={part.id} timeout={350} classNames="slide-transition">
         <li key={part.id}>
           <Part Part={part}></Part>
         </li>
@@ -50,7 +50,6 @@ class Parts extends Component {
 
   render() {
     const { Parts } = this.props;
-    console.log(Parts);
     return (
       <React.Fragment>
         <div className="parts-box" onClick={e => this.triggerDropdown(e)}>
