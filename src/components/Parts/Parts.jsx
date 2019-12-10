@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { AppContext } from "../../AppContext";
 import { Part } from "../Part";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./Parts.css";
 
 class Parts extends Component {
@@ -15,20 +16,22 @@ class Parts extends Component {
       ? this.setState({ dropdown: true })
       : this.setState({ dropdown: false });
   };
-
+  applyTransitions = array => {
+    return array.Parts.map(part => (
+      <CSSTransition key={part.id} timeout={300} classNames="slide-transition">
+        <li>
+          <Part Part={part}></Part>
+        </li>
+      </CSSTransition>
+    ));
+  };
   renderDropdown = list => {
     let { dropdown } = this.state;
     if (dropdown === false) {
       return (
         <div className="parts-dropdown scrollbar">
           <div className="parts-wrapper">
-            <ul>
-              {list.Parts.map(part => (
-                <li>
-                  <Part Part={part}></Part>
-                </li>
-              ))}
-            </ul>
+            <ul>{this.applyTransitions(list)}</ul>
           </div>
         </div>
       );
@@ -53,7 +56,7 @@ class Parts extends Component {
             <div className="parts-box" onClick={e => this.triggerDropdown(e)}>
               {this.renderPartsNotifications(value.Parts)}
             </div>
-            {this.renderDropdown(value)}
+            <TransitionGroup>{this.renderDropdown(value)}</TransitionGroup>
           </React.Fragment>
         )}
       </AppContext.Consumer>
