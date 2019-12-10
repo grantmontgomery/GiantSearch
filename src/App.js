@@ -70,7 +70,7 @@ class App extends Component {
     return (
       <AppContext.Provider value={this.state}>
         <div>
-          <Parts></Parts>
+          <Parts Parts={this.state.Parts}></Parts>
           <SearchBox></SearchBox>
           <Results
             Events={this.state.Events}

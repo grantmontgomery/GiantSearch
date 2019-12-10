@@ -3,24 +3,41 @@ import { AppContext } from "../../AppContext";
 import "./Part.css";
 
 class Part extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.props.Part.type === "venue"
+      ? (this.state = {
+          image: this.props.Part.image,
+          name: this.props.Part.name,
+          city: this.props.Part.location.city,
+          price: this.props.Part.price
+        })
+      : (this.state = {
+          image: this.props.Part.image,
+          name: this.props.Part.name,
+          venue: this.props.Part.venue,
+          date: this.props.Part.date,
+          time: this.props.Part.time
+        });
+  }
 
   renderType = () => {
     if (this.props.Part.type === "venue") {
       return (
         <AppContext.Consumer>
           {value => {
+            const { image, name, city, price } = this.state;
             return (
               <div className="part-wrapper">
                 <div className="part-image-wrapper">
-                  <img src={this.props.Part.image} alt="" />
+                  <img src={image} alt="" />
                 </div>
                 <div className="part-text-wrapper">
-                  <span>{this.props.Part.name}</span>
+                  <span>{name}</span>
                   <br />
-                  <span>{this.props.Part.location.city}</span>
+                  <span>{city}</span>
                   <br />
-                  <span>{this.props.Part.price}</span>
+                  <span>{price}</span>
                 </div>
                 <button
                   className="remove-part"
@@ -37,17 +54,18 @@ class Part extends Component {
       return (
         <AppContext.Consumer>
           {value => {
+            const { image, name, venue, date, time } = this.state;
             return (
               <div className="part-wrapper">
                 <div className="part-image-wrapper">
-                  <img src={this.props.Part.image} alt="" />
+                  <img src={image} alt="" />
                 </div>
                 <div className="part-text-wrapper">
-                  <span className="title">{this.props.Part.name}</span>
+                  <span className="title">{name}</span>
                   <br />
-                  <span className="details">{this.props.Part.venue}</span>
+                  <span className="details">{venue}</span>
                   <br />
-                  <span className="details">{`${this.props.Part.date} ${this.props.Part.time}`}</span>
+                  <span className="details">{`${date} ${time}`}</span>
                 </div>
                 <button
                   className="remove-part"

@@ -17,28 +17,28 @@ class Parts extends Component {
       : this.setState({ dropdown: false });
   };
   applyTransitions = array => {
-    return array.Parts.map(part => (
+    return array.map(part => (
       <CSSTransition key={part.id} timeout={300} classNames="slide-transition">
-        <li>
+        <li key={part.id}>
           <Part Part={part}></Part>
         </li>
       </CSSTransition>
     ));
   };
-  renderDropdown = list => {
-    let { dropdown } = this.state;
-    if (dropdown === false) {
-      return (
-        <div className="parts-dropdown scrollbar">
-          <div className="parts-wrapper">
-            <ul>{this.applyTransitions(list)}</ul>
-          </div>
-        </div>
-      );
-    } else {
-      return <React.Fragment></React.Fragment>;
-    }
-  };
+  // renderDropdown = list => {
+  //   let { dropdown } = this.state;
+  //   if (dropdown === false) {
+  //     return (
+  //       <div className="parts-dropdown scrollbar">
+  //         <div className="parts-wrapper">
+  //           <ul>{this.applyTransitions(list)}</ul>
+  //         </div>
+  //       </div>
+  //     );
+  //   } else {
+  //     return <React.Fragment></React.Fragment>;
+  //   }
+  // };
 
   renderPartsNotifications = list => {
     if (list.length > 0) {
@@ -49,17 +49,21 @@ class Parts extends Component {
   };
 
   render() {
+    const { Parts } = this.props;
+    console.log(Parts);
     return (
-      <AppContext.Consumer>
-        {value => (
-          <React.Fragment>
-            <div className="parts-box" onClick={e => this.triggerDropdown(e)}>
-              {this.renderPartsNotifications(value.Parts)}
+      <React.Fragment>
+        <div className="parts-box" onClick={e => this.triggerDropdown(e)}>
+          {this.renderPartsNotifications(Parts)}
+        </div>
+        <TransitionGroup>
+          <div className="parts-dropdown scrollbar">
+            <div className="parts-wrapper">
+              <ul>{this.applyTransitions(Parts)}</ul>
             </div>
-            <TransitionGroup>{this.renderDropdown(value)}</TransitionGroup>
-          </React.Fragment>
-        )}
-      </AppContext.Consumer>
+          </div>
+        </TransitionGroup>
+      </React.Fragment>
     );
   }
 }
