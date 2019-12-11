@@ -54,6 +54,7 @@ class Parts extends Component {
       <React.Fragment>
         <div className="parts-box" onClick={e => this.triggerDropdown(e)}>
           {this.renderPartsNotifications(Parts)}
+          Parts
         </div>
 
         <div className="parts-dropdown scrollbar">
