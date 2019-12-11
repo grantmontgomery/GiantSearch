@@ -27,7 +27,13 @@
   padding: 0;
 }
 
-.parts-wrapper li {
+.parts-wrapper .list {
+  position: absolute;
+  float: left;
+  left: 0px;
+}
+
+.parts-wrapper .list li {
   height: 50px;
   width: 225px;
   position: relative;
@@ -38,7 +44,7 @@
   margin-bottom: 10px;
 }
 
-.parts-wrapper li:hover {
+.parts-wrapper .list li:hover {
   -webkit-transform: scale(1.01);
           transform: scale(1.01);
   -webkit-transition: 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -108,8 +114,8 @@
 .slide-transition-exit {
   opacity: 1;
   max-height: 50px;
-  -webkit-transition: all 500ms ease-in-out;
-  transition: all 500ms ease-in-out;
+  -webkit-transition: all 400ms ease-in-out;
+  transition: all 400ms ease-in-out;
 }
 
 .slide-transition-exit.slide-transition-exit-active {
@@ -117,8 +123,8 @@
           animation-name: slideOut;
   -webkit-animation-duration: 400ms;
           animation-duration: 400ms;
-  -webkit-transition: 350ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
-  transition: 350ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
+  -webkit-transition: 300ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
+  transition: 300ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
   opacity: 0;
   max-height: 0;
 }

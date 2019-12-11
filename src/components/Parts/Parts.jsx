@@ -58,7 +58,7 @@ class Parts extends Component {
 
         <div className="parts-dropdown scrollbar">
           <div className="parts-wrapper">
-            <ul>
+            <ul className="list">
               <TransitionGroup>{this.applyTransitions(Parts)}</TransitionGroup>
             </ul>
           </div>
