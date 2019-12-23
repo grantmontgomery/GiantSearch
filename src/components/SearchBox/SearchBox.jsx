@@ -16,7 +16,13 @@ class SearchBox extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleChange = date => {
+  handleRadiusChange = event => {
+    const { target } = event;
+    const valuetoInt = parseInt(target.value);
+    this.setState({ [target.name]: valuetoInt });
+  };
+
+  handleDateChange = date => {
     const selectedDate = new Date(date);
     this.setState({ date: selectedDate });
     let months =
@@ -97,7 +103,7 @@ class SearchBox extends Component {
 
   onHandleSubmit = (event, makecall) => {
     event.preventDefault();
-    const { location, startFormatted, term, endFormatted } = this.state;
+    const { location, startFormatted, term, endFormatted, radius } = this.state;
     if (term === "" && location === "" && startFormatted === "") {
       alert("Must enter in a term, time, and location");
     } else if (term === "" && location === "" && startFormatted !== "") {
@@ -113,12 +119,13 @@ class SearchBox extends Component {
     } else if (location === "" && startFormatted !== "" && term !== "") {
       alert("Must enter in a location");
     } else {
-      makecall(term, location, startFormatted, endFormatted);
+      makecall(term, location, startFormatted, endFormatted, radius);
     }
-    this.setState({ term: "", location: "", startFormatted: "" });
+    this.setState({ term: "", location: "", startFormatted: "", radius: "" });
   };
 
   render() {
+    console.log(this.state);
     return (
       <AppContext.Consumer>
         {value => {
@@ -146,10 +153,20 @@ class SearchBox extends Component {
                 <DatePicker
                   name="date"
                   selected={this.state.date}
-                  onChange={this.handleChange}
+                  onChange={this.handleDateChange}
                   showTimeSelect
                   dateFormat="Pp"
                 ></DatePicker>
+                <br />
+                <label htmlFor="">Radius</label>
+                <select name="radius" id="" onChange={this.handleRadiusChange}>
+                  <option value="none">Select miles...</option>
+                  <option value="1610">Within 1 mile</option>
+                  <option value="8050">Within 5 miles</option>
+                  <option value="16100">Within 10 miles</option>
+                  <option value="40250">Within 25 miles</option>
+                  <option value="80500">Within 50 miles</option>
+                </select>
                 <button onClick={e => this.onHandleSubmit(e, value.makeCall)}>
                   Submit
                 </button>

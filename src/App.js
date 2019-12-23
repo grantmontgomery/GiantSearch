@@ -28,14 +28,14 @@ class App extends Component {
     });
   };
 
-  makeCall = (term, location, startFormatted, endFormatted) => {
+  makeCall = (term, location, startFormatted, endFormatted, radius) => {
     fetch("http://localhost:5000/yelpSearch", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
       method: "POST",
-      body: JSON.stringify({ term, location })
+      body: JSON.stringify({ term, location, radius })
     })
       .then(res => res.json())
       .then(yelpData => {

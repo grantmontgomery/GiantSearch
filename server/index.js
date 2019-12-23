@@ -16,9 +16,8 @@ app.post("/yelpSearch", (req, res) => {
     params = {
       term: req.body.term,
       location: req.body.location,
-      radius: 15000
+      radius: req.body.radius
     };
-
   Object.keys(params).forEach(key =>
     yelp.searchParams.append(key, params[key])
   );
@@ -31,6 +30,10 @@ app.post("/yelpSearch", (req, res) => {
     .then(data => res.send(data))
     .catch(err => res.send(err.message));
 });
+
+// app.post("/yelpSearch", (req, res) => {
+//   console.log(req.body);
+// });
 
 app.post("/ticketMasterSearch", (req, res) => {
   const ticketMaster = new URL(
