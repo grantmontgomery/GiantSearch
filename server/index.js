@@ -11,17 +11,17 @@ app.use(json());
 app.use(urlEncoded({ extended: true }));
 app.use(cors());
 
-app.post("/yelpSearch", (req, res) => {
-  const yelp = new URL("https://api.yelp.com/v3/businesses/search"),
+app.post("/yelpBusinessSearch", (req, res) => {
+  const yelpBusinesses = new URL("https://api.yelp.com/v3/businesses/search"),
     params = {
       term: req.body.term,
       location: req.body.location,
       radius: req.body.radius
     };
   Object.keys(params).forEach(key =>
-    yelp.searchParams.append(key, params[key])
+    yelpBusinesses.searchParams.append(key, params[key])
   );
-  fetch(yelp, {
+  fetch(yelpBusinesses, {
     headers: {
       Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
     }
@@ -31,8 +31,20 @@ app.post("/yelpSearch", (req, res) => {
     .catch(err => res.send(err.message));
 });
 
-// app.post("/yelpSearch", (req, res) => {
-//   console.log(req.body);
+// app.post("/yelpEventSearch", (req, res) => {
+//   const yelpEvents = new URL("https://api.yelp.com/v3/events"),
+//     params = {};
+//   Object.keys(params).forEach(key =>
+//     yelpEvents.searchParams.append(key, params[key])
+//   );
+//   fetch(yelpEvents, {
+//     headers: {
+//       Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
+//     }
+//   })
+//     .then(res => res.json())
+//     .then(data => res.send(data))
+//     .catch(err => res.send(err.message));
 // });
 
 app.post("/ticketMasterSearch", (req, res) => {

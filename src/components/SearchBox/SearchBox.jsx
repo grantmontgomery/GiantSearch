@@ -22,7 +22,8 @@ class SearchBox extends Component {
     this.setState({ [target.name]: valuetoInt });
   };
 
-  handleDateChange = date => {
+  handleStartDateChange = date => {
+    const unixStartDate = Math.round(new Date(date).getTime() / 1000);
     const selectedDate = new Date(date);
     this.setState({ date: selectedDate });
     let months =
@@ -56,49 +57,49 @@ class SearchBox extends Component {
         ? "0" + selectedDate.getSeconds()
         : selectedDate.getSeconds();
     this.setState({
-      startFormatted: `${selectedDate.getFullYear()}-${months}-${days}T${hours}:${minutes}:${seconds}Z`
+      startFormatted: `${selectedDate.getFullYear()}-${months}-${days}T${hours}:${minutes}:${seconds}Z`,
+      startUnix: unixStartDate
     });
-    //Endformat of next day
-    let nextDay = new Date(date.setDate(date.getDate() + 1));
-    let endMonths =
-      nextDay.getMonth() === 0
-        ? `0${1}`
-        : nextDay.getMonth() + 1 < 10
-        ? "0" + (nextDay.getMonth() + 1)
-        : nextDay.getMonth() + 1;
-    let endDays =
-      nextDay.getDate() === 0
-        ? nextDay.getDate() + "0"
-        : nextDay.getDate() < 10
-        ? "0" + nextDay.getDate()
-        : nextDay.getDate();
-    let endHours =
-      nextDay.getHours() === 0
-        ? nextDay.getHours() + "0"
-        : nextDay.getHours() < 10
-        ? "0" + nextDay.getHours()
-        : nextDay.getHours();
-    let endMinutes =
-      nextDay.getMinutes() === 0
-        ? nextDay.getMinutes() + "0"
-        : nextDay.getMinutes() < 10
-        ? "0" + nextDay.getMinutes()
-        : nextDay.getMinutes();
-    let endSeconds =
-      nextDay.getSeconds() === 0
-        ? nextDay.getSeconds() + "0"
-        : nextDay.getSeconds() < 10
-        ? "0" + nextDay.getSeconds()
-        : nextDay.getSeconds();
+  };
 
-    date.getHours() > 15
-      ? this.setState({
-          endFormatted: `${nextDay.getFullYear()}-${endMonths}-${endDays}T${endHours}:${endMinutes}:${endSeconds}Z`
-        })
-      : this.setState({
-          endFormatted: `${date.getFullYear()}-${months}-${days}T${hours +
-            8}:${minutes}:${seconds}Z`
-        });
+  handleEndDateChange = date => {
+    const unixEndDate = Math.round(new Date(date).getTime() / 1000);
+    const selectedDate = new Date(date);
+    this.setState({ date: selectedDate });
+    let months =
+      selectedDate.getMonth() === 0
+        ? `0${1}`
+        : selectedDate.getMonth() + 1 < 10
+        ? "0" + (selectedDate.getMonth() + 1)
+        : selectedDate.getMonth() + 1;
+    let days =
+      selectedDate.getDate() === 0
+        ? selectedDate.getDate() + "0"
+        : selectedDate.getDate() < 10
+        ? "0" + selectedDate.getDate()
+        : selectedDate.getDate();
+    let hours =
+      selectedDate.getHours() === 0
+        ? selectedDate.getHours() + "0"
+        : selectedDate.getHours() < 10
+        ? "0" + selectedDate.getHours()
+        : selectedDate.getHours();
+    let minutes =
+      selectedDate.getMinutes() === 0
+        ? selectedDate.getMinutes() + "0"
+        : selectedDate.getMinutes() < 10
+        ? "0" + selectedDate.getMinutes()
+        : selectedDate.getMinutes();
+    let seconds =
+      selectedDate.getSeconds() === 0
+        ? selectedDate.getSeconds() + "0"
+        : selectedDate.getSeconds() < 10
+        ? "0" + selectedDate.getSeconds()
+        : selectedDate.getSeconds();
+    this.setState({
+      endFormatted: `${selectedDate.getFullYear()}-${months}-${days}T${hours}:${minutes}:${seconds}Z`,
+      endUnix: unixEndDate
+    });
   };
 
   onHandleSubmit = (event, makecall) => {
@@ -149,11 +150,20 @@ class SearchBox extends Component {
                   onChange={e => this.updateTextInput(e)}
                 />
                 <br />
-                <label htmlFor="">Date/Time</label>
+                <label htmlFor="">When are you meeting?</label>
                 <DatePicker
                   name="date"
                   selected={this.state.date}
-                  onChange={this.handleDateChange}
+                  onChange={this.handleStartDateChange}
+                  showTimeSelect
+                  dateFormat="Pp"
+                ></DatePicker>
+                <br />
+                <label htmlFor="">When is the end of the date?</label>
+                <DatePicker
+                  name="date"
+                  selected={this.state.date}
+                  onChange={this.handleEndDateChange}
                   showTimeSelect
                   dateFormat="Pp"
                 ></DatePicker>

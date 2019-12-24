@@ -29,7 +29,7 @@ class App extends Component {
   };
 
   makeCall = (term, location, startFormatted, endFormatted, radius) => {
-    fetch("http://localhost:5000/yelpSearch", {
+    fetch("http://localhost:5000/yelpBusinessSearch", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
