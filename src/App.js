@@ -61,6 +61,7 @@ class App extends Component {
           .then(res => res.json())
           .then(yelpEventsData => {
             const { events } = yelpEventsData;
+            events.forEach(event => (event["source"] = "yelp"));
             console.log(events);
           });
         fetch("http://localhost:5000/ticketMasterSearch", {
@@ -73,9 +74,12 @@ class App extends Component {
         })
           .then(res => res.json())
           .then(data => {
+            const { _embedded } = data;
+            const { events } = _embedded;
+            events.forEach(event => (event["source"] = "ticketmaster"));
             this.setState({
               Venues: [...businesses],
-              Events: [...data._embedded.events]
+              Events: [...events]
             });
           })
           .catch(err => {

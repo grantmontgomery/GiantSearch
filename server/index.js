@@ -21,7 +21,6 @@ app.post("/yelpBusinessSearch", (req, res) => {
   Object.keys(params).forEach(key =>
     yelpBusinesses.searchParams.append(key, params[key])
   );
-  console.log(yelpBusinesses);
   fetch(yelpBusinesses, {
     headers: {
       Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
@@ -43,7 +42,6 @@ app.post("/yelpEventSearch", (req, res) => {
   Object.keys(params).forEach(key =>
     yelpEvents.searchParams.append(key, params[key])
   );
-  console.log(yelpEvents);
   fetch(yelpEvents, {
     headers: {
       Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
