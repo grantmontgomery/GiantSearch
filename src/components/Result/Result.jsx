@@ -5,42 +5,62 @@ import "./Result.css";
 class Result extends Component {
   constructor(props) {
     super(props);
-    props.Result.type === "venue"
-      ? (this.state = {
-          AddRemove: "+",
-          buttonSwitch: "add",
+    if (props.Result.type === "venue") {
+      this.state = {
+        AddRemove: "+",
+        buttonSwitch: "add",
+        name: props.Result.name,
+        image: props.Result.image_url,
+        id: props.Result.id,
+        location: props.Result.location,
+        type: props.Result.type,
+        price: props.Result.price,
+        rating: props.Result.rating
+      };
+    } else {
+      if (props.Result.source === "ticketmaster") {
+        "priceRanges" in props.Result
+          ? (this.state = {
+              name: props.Result.name,
+              date: props.Result.dates.start.localDate,
+              time: props.Result.dates.start.localTime,
+              id: props.Result.id,
+              type: props.Result.type,
+              image: props.Result.images[0].url,
+              venue: props.Result._embedded.venues[0].name,
+              price: props.Result.priceRanges[0].min,
+              source: props.Result.source,
+              AddRemove: "+",
+              buttonSwitch: "add"
+            })
+          : (this.state = {
+              name: props.Result.name,
+              date: props.Result.dates.start.localDate,
+              time: props.Result.dates.start.localTime,
+              id: props.Result.id,
+              image: props.Result.images[0].url,
+              type: props.Result.type,
+              source: props.Result.source,
+              venue: props.Result._embedded.venues[0].name,
+              AddRemove: "+",
+              buttonSwitch: "add"
+            });
+      } else {
+        this.state = {
           name: props.Result.name,
+          date: props.Result.time_start,
+          id: props.Result.id,
           image: props.Result.image_url,
-          id: props.Result.id,
-          location: props.Result.location,
           type: props.Result.type,
-          price: props.Result.price,
-          rating: props.Result.rating
-        })
-      : "priceRanges" in props.Result
-      ? (this.state = {
-          name: props.Result.name,
-          date: props.Result.dates.start.localDate,
-          time: props.Result.dates.start.localTime,
-          id: props.Result.id,
-          type: props.Result.type,
-          image: props.Result.images[0].url,
-          venue: props.Result._embedded.venues[0].name,
-          price: props.Result.priceRanges[0].min,
+          location: `${props.Result.location.address1.toLowerCase()}, ${
+            props.Result.location.city
+          }`,
+          source: props.Result.source,
           AddRemove: "+",
           buttonSwitch: "add"
-        })
-      : (this.state = {
-          name: props.Result.name,
-          date: props.Result.dates.start.localDate,
-          time: props.Result.dates.start.localTime,
-          id: props.Result.id,
-          image: props.Result.images[0].url,
-          type: props.Result.type,
-          venue: props.Result._embedded.venues[0].name,
-          AddRemove: "+",
-          buttonSwitch: "add"
-        });
+        };
+      }
+    }
   }
 
   changeButton = (addfunction, removefunction) => {
@@ -93,39 +113,116 @@ class Result extends Component {
       return <li>Starting at: ${this.state.price}.00</li>;
     }
   };
+  // eventRender = () => {
+  //   return (
+  //     <AppContext.Consumer>
+  //       {value => (
+  //         <div className="resultBox">
+  //           <div className="image-wrapper">
+  //             <img src={this.props.Result.images[0].url} alt="" />
+  //           </div>
+  //           <button
+  //             className={this.state.buttonSwitch}
+  //             onClick={() => this.changeButton(value.addPart, value.removePart)}
+  //           >
+  //             {this.state.AddRemove}
+  //           </button>
+  //           <div className="text-wrapper">
+  //             <ul>
+  //               <li>
+  //                 <a href={this.props.Result.url} target="_blank">
+  //                   {this.props.Result.name}
+  //                 </a>
+  //               </li>
+  //               <li>{this.props.Result.dates.start.localDate}</li>
+  //               <li>{this.props.Result.dates.start.localTime}</li>
+  //               <li>{this.props.Result._embedded.venues[0].name}</li>
+  //               {this.renderPrice()}
+  //             </ul>
+  //           </div>
+  //         </div>
+  //       )}
+  //     </AppContext.Consumer>
+  //   );
+  // };
   eventRender = () => {
-    return (
-      <AppContext.Consumer>
-        {value => (
-          <div className="resultBox">
-            <div className="image-wrapper">
-              <img src={this.props.Result.images[0].url} alt="" />
+    if (this.state.source === "ticketmaster") {
+      return (
+        <AppContext.Consumer>
+          {value => (
+            <div className="resultBox">
+              <div className="image-wrapper">
+                <img src={this.props.Result.images[0].url} alt="" />
+              </div>
+              <button
+                className={this.state.buttonSwitch}
+                onClick={() =>
+                  this.changeButton(value.addPart, value.removePart)
+                }
+              >
+                {this.state.AddRemove}
+              </button>
+              <div className="text-wrapper">
+                <ul>
+                  <li>
+                    <a href={this.props.Result.url} target="_blank">
+                      {this.props.Result.name}
+                    </a>
+                  </li>
+                  <li>{this.props.Result.dates.start.localDate}</li>
+                  <li>{this.props.Result.dates.start.localTime}</li>
+                  <li>{this.props.Result._embedded.venues[0].name}</li>
+                  {this.renderPrice()}
+                </ul>
+              </div>
             </div>
-            <button
-              className={this.state.buttonSwitch}
-              onClick={() => this.changeButton(value.addPart, value.removePart)}
-            >
-              {this.state.AddRemove}
-            </button>
-            <div className="text-wrapper">
-              <ul>
-                <li>
-                  <a href={this.props.Result.url} target="_blank">
-                    {this.props.Result.name}
-                  </a>
-                </li>
-                <li>{this.props.Result.dates.start.localDate}</li>
-                <li>{this.props.Result.dates.start.localTime}</li>
-                <li>{this.props.Result._embedded.venues[0].name}</li>
-                {this.renderPrice()}
-              </ul>
+          )}
+        </AppContext.Consumer>
+      );
+    } else {
+      return (
+        // name: props.Result.name,
+        //   date: props.Result.time_start,
+        //   id: props.Result.id,
+        //   image: props.Result.image_url,
+        //   type: props.Result.type,
+        //   location: `${props.Result.location.address1.toLowerCase()}, ${
+        //     props.Result.location.city
+        //   }`,
+        //   source: props.Result.source,
+        //   AddRemove: "+",
+        //   buttonSwitch: "add"
+        <AppContext.Consumer>
+          {value => (
+            <div className="resultBox">
+              <div className="image-wrapper">
+                <img src={this.state.image} alt="" />
+              </div>
+              <button
+                className={this.state.buttonSwitch}
+                onClick={() =>
+                  this.changeButton(value.addPart, value.removePart)
+                }
+              >
+                {this.state.AddRemove}
+              </button>
+              <div className="text-wrapper">
+                <ul>
+                  <li>
+                    <a href={this.props.Result.event_site_url} target="_blank">
+                      {this.state.Result.name}
+                    </a>
+                  </li>
+                  <li>{this.state.date}</li>
+                  <li>{this.state.location}</li>
+                </ul>
+              </div>
             </div>
-          </div>
-        )}
-      </AppContext.Consumer>
-    );
+          )}
+        </AppContext.Consumer>
+      );
+    }
   };
-
   render() {
     return this.props.Result.type === "venue"
       ? this.venueRender()

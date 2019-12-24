@@ -61,8 +61,13 @@ class App extends Component {
           .then(res => res.json())
           .then(yelpEventsData => {
             const { events } = yelpEventsData;
-            events.forEach(event => (event["source"] = "yelp"));
+            events.forEach(
+              event => ((event.source = "yelp"), (event.type = "event"))
+            );
             console.log(events);
+            // this.setState(() => ({
+            //   Events: [...this.state.Events, ...events]
+            // }));
           });
         fetch("http://localhost:5000/ticketMasterSearch", {
           headers: {
@@ -76,11 +81,13 @@ class App extends Component {
           .then(data => {
             const { _embedded } = data;
             const { events } = _embedded;
-            events.forEach(event => (event["source"] = "ticketmaster"));
-            this.setState({
+            events.forEach(
+              event => ((event.source = "ticketmaster"), (event.type = "event"))
+            );
+            this.setState(() => ({
               Venues: [...businesses],
-              Events: [...events]
-            });
+              Events: [...this.state.Events, ...events]
+            }));
           })
           .catch(err => {
             this.setState({
