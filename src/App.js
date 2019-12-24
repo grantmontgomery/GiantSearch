@@ -47,8 +47,8 @@ class App extends Component {
       body: JSON.stringify({ term, location, radius })
     })
       .then(res => res.json())
-      .then(yelpData => {
-        const { businesses } = yelpData;
+      .then(yelpBusinessData => {
+        const { businesses } = yelpBusinessData;
         businesses.forEach(business => (business["type"] = "venue"));
         fetch("http://localhost:5000/yelpEventSearch", {
           headers: {
@@ -57,7 +57,12 @@ class App extends Component {
           },
           method: "POST",
           body: JSON.stringify({ location, radius, startUnix, endUnix })
-        }).then(res => console.log(res));
+        })
+          .then(res => res.json())
+          .then(yelpEventsData => {
+            const { events } = yelpEventsData;
+            console.log(events);
+          });
         fetch("http://localhost:5000/ticketMasterSearch", {
           headers: {
             Accept: "application/json",
