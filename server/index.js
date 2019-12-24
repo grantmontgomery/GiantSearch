@@ -31,21 +31,26 @@ app.post("/yelpBusinessSearch", (req, res) => {
     .catch(err => res.send(err.message));
 });
 
-// app.post("/yelpEventSearch", (req, res) => {
-//   const yelpEvents = new URL("https://api.yelp.com/v3/events"),
-//     params = {};
-//   Object.keys(params).forEach(key =>
-//     yelpEvents.searchParams.append(key, params[key])
-//   );
-//   fetch(yelpEvents, {
-//     headers: {
-//       Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
-//     }
-//   })
-//     .then(res => res.json())
-//     .then(data => res.send(data))
-//     .catch(err => res.send(err.message));
-// });
+app.post("/yelpEventSearch", (req, res) => {
+  const yelpEvents = new URL("https://api.yelp.com/v3/events"),
+    params = {
+      location: req.body.locaiton,
+      start_date: req.body.startUnix,
+      end_date: req.body.endUnix,
+      radius: req.body.radius
+    };
+  Object.keys(params).forEach(key =>
+    yelpEvents.searchParams.append(key, params[key])
+  );
+  fetch(yelpEvents, {
+    headers: {
+      Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
+    }
+  })
+    .then(res => res.json())
+    .then(data => res.send(data))
+    .catch(err => res.send(err.message));
+});
 
 app.post("/ticketMasterSearch", (req, res) => {
   const ticketMaster = new URL(

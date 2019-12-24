@@ -109,31 +109,70 @@ class SearchBox extends Component {
       startFormatted,
       term,
       endFormatted,
-
+      endUnix,
+      startUnix,
       radius
     } = this.state;
-    if (term === "" && location === "" && startFormatted === "") {
-      alert("Must enter in a term, time, and location");
-    } else if (term === "" && location === "" && startFormatted !== "") {
+    if (
+      term === "" &&
+      location === "" &&
+      startFormatted === "" &&
+      endFormatted === ""
+    ) {
+      alert("Must enter in a term, times, and location");
+    } else if (
+      term === "" &&
+      location === "" &&
+      startFormatted !== "" &&
+      endFormatted !== ""
+    ) {
       alert("Must enter in a term and location");
-    } else if (startFormatted === "" && location === "" && term !== "") {
-      alert("Must enter in a time and location");
-    } else if (startFormatted === "" && term === "" && location !== "") {
-      alert("Must enter in a time and term");
-    } else if (term === "" && startFormatted !== "" && location !== "") {
+    } else if (
+      startFormatted === "" &&
+      endFormatted === "" &&
+      location === "" &&
+      term !== ""
+    ) {
+      alert("Must enter in times and location");
+    } else if (
+      startFormatted === "" &&
+      endFormatted === "" &&
+      term === "" &&
+      location !== ""
+    ) {
+      alert("Must enter in times and term");
+    } else if (
+      term === "" &&
+      startFormatted !== "" &&
+      endFormatted !== "" &&
+      location !== ""
+    ) {
       alert("Must enter in a term.");
-    } else if (startFormatted === "" && term !== "" && location !== "") {
-      alert("Must enter in a time");
-    } else if (location === "" && startFormatted !== "" && term !== "") {
+    } else if (
+      startFormatted === "" &&
+      endFormatted === "" &&
+      term !== "" &&
+      location !== ""
+    ) {
+      alert("Must enter times");
+    } else if (
+      location === "" &&
+      startFormatted !== "" &&
+      endFormatted !== "" &&
+      term !== ""
+    ) {
       alert("Must enter in a location");
+    } else if (endFormatted === "") {
+      alert("Must enter in a rough end time.");
     } else {
       makecall(
         term,
         location,
-
         startFormatted,
         endFormatted,
-        radius
+        radius,
+        endUnix,
+        startUnix
       );
     }
     this.setState({
@@ -148,7 +187,6 @@ class SearchBox extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <AppContext.Consumer>
         {value => {
@@ -167,6 +205,7 @@ class SearchBox extends Component {
                 <input
                   name="location"
                   type="text"
+                  autoComplete="off"
                   placeholder="ex. 90015, Los Angeles, CA"
                   value={this.state.location}
                   onChange={e => this.updateTextInput(e)}
@@ -177,6 +216,7 @@ class SearchBox extends Component {
                   name="date"
                   selected={this.state.startDate}
                   onChange={this.handleStartDateChange}
+                  autoComplete="off"
                   showTimeSelect
                   dateFormat="Pp"
                 ></DatePicker>
@@ -184,6 +224,7 @@ class SearchBox extends Component {
                 <label htmlFor="">When is the end of the date?</label>
                 <DatePicker
                   name="date"
+                  autoComplete="off"
                   selected={this.state.endDate}
                   onChange={this.handleEndDateChange}
                   showTimeSelect
@@ -197,7 +238,6 @@ class SearchBox extends Component {
                   <option value="8050">Within 5 miles</option>
                   <option value="16100">Within 10 miles</option>
                   <option value="40250">Within 25 miles</option>
-                  <option value="80500">Within 50 miles</option>
                 </select>
                 <button onClick={e => this.onHandleSubmit(e, value.makeCall)}>
                   Submit

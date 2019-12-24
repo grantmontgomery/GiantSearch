@@ -3,6 +3,7 @@ import { SearchBox } from "./components";
 import { Results } from "./components";
 import { AppContext } from "./AppContext";
 import { Parts } from "./components";
+import fetch from "node-fetch";
 require("dotenv").config();
 
 class App extends Component {
@@ -28,7 +29,15 @@ class App extends Component {
     });
   };
 
-  makeCall = (term, location, startFormatted, endFormatted, radius) => {
+  makeCall = (
+    term,
+    location,
+    startFormatted,
+    endFormatted,
+    radius,
+    endUnix,
+    startUnix
+  ) => {
     fetch("http://localhost:5000/yelpBusinessSearch", {
       headers: {
         Accept: "application/json",
@@ -41,6 +50,14 @@ class App extends Component {
       .then(yelpData => {
         const { businesses } = yelpData;
         businesses.forEach(business => (business["type"] = "venue"));
+        fetch("http://localhost:5000/yelpEventSearch", {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({ location, radius, startUnix, endUnix })
+        }).then(res => console.log(res));
         fetch("http://localhost:5000/ticketMasterSearch", {
           headers: {
             Accept: "application/json",
