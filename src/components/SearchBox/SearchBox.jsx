@@ -24,87 +24,94 @@ class SearchBox extends Component {
 
   handleStartDateChange = date => {
     const unixStartDate = Math.round(new Date(date).getTime() / 1000);
-    const selectedDate = new Date(date);
-    this.setState({ date: selectedDate });
+    const startSelectedDate = new Date(date);
+    this.setState({ startDate: startSelectedDate });
     let months =
-      selectedDate.getMonth() === 0
+      startSelectedDate.getMonth() === 0
         ? `0${1}`
-        : selectedDate.getMonth() + 1 < 10
-        ? "0" + (selectedDate.getMonth() + 1)
-        : selectedDate.getMonth() + 1;
+        : startSelectedDate.getMonth() + 1 < 10
+        ? "0" + (startSelectedDate.getMonth() + 1)
+        : startSelectedDate.getMonth() + 1;
     let days =
-      selectedDate.getDate() === 0
-        ? selectedDate.getDate() + "0"
-        : selectedDate.getDate() < 10
-        ? "0" + selectedDate.getDate()
-        : selectedDate.getDate();
+      startSelectedDate.getDate() === 0
+        ? startSelectedDate.getDate() + "0"
+        : startSelectedDate.getDate() < 10
+        ? "0" + startSelectedDate.getDate()
+        : startSelectedDate.getDate();
     let hours =
-      selectedDate.getHours() === 0
-        ? selectedDate.getHours() + "0"
-        : selectedDate.getHours() < 10
-        ? "0" + selectedDate.getHours()
-        : selectedDate.getHours();
+      startSelectedDate.getHours() === 0
+        ? startSelectedDate.getHours() + "0"
+        : startSelectedDate.getHours() < 10
+        ? "0" + startSelectedDate.getHours()
+        : startSelectedDate.getHours();
     let minutes =
-      selectedDate.getMinutes() === 0
-        ? selectedDate.getMinutes() + "0"
-        : selectedDate.getMinutes() < 10
-        ? "0" + selectedDate.getMinutes()
-        : selectedDate.getMinutes();
+      startSelectedDate.getMinutes() === 0
+        ? startSelectedDate.getMinutes() + "0"
+        : startSelectedDate.getMinutes() < 10
+        ? "0" + startSelectedDate.getMinutes()
+        : startSelectedDate.getMinutes();
     let seconds =
-      selectedDate.getSeconds() === 0
-        ? selectedDate.getSeconds() + "0"
-        : selectedDate.getSeconds() < 10
-        ? "0" + selectedDate.getSeconds()
-        : selectedDate.getSeconds();
+      startSelectedDate.getSeconds() === 0
+        ? startSelectedDate.getSeconds() + "0"
+        : startSelectedDate.getSeconds() < 10
+        ? "0" + startSelectedDate.getSeconds()
+        : startSelectedDate.getSeconds();
     this.setState({
-      startFormatted: `${selectedDate.getFullYear()}-${months}-${days}T${hours}:${minutes}:${seconds}Z`,
+      startFormatted: `${startSelectedDate.getFullYear()}-${months}-${days}T${hours}:${minutes}:${seconds}Z`,
       startUnix: unixStartDate
     });
   };
 
   handleEndDateChange = date => {
     const unixEndDate = Math.round(new Date(date).getTime() / 1000);
-    const selectedDate = new Date(date);
-    this.setState({ date: selectedDate });
+    const endSelectedDate = new Date(date);
+    this.setState({ endDate: endSelectedDate });
     let months =
-      selectedDate.getMonth() === 0
+      endSelectedDate.getMonth() === 0
         ? `0${1}`
-        : selectedDate.getMonth() + 1 < 10
-        ? "0" + (selectedDate.getMonth() + 1)
-        : selectedDate.getMonth() + 1;
+        : endSelectedDate.getMonth() + 1 < 10
+        ? "0" + (endSelectedDate.getMonth() + 1)
+        : endSelectedDate.getMonth() + 1;
     let days =
-      selectedDate.getDate() === 0
-        ? selectedDate.getDate() + "0"
-        : selectedDate.getDate() < 10
-        ? "0" + selectedDate.getDate()
-        : selectedDate.getDate();
+      endSelectedDate.getDate() === 0
+        ? endSelectedDate.getDate() + "0"
+        : endSelectedDate.getDate() < 10
+        ? "0" + endSelectedDate.getDate()
+        : endSelectedDate.getDate();
     let hours =
-      selectedDate.getHours() === 0
-        ? selectedDate.getHours() + "0"
-        : selectedDate.getHours() < 10
-        ? "0" + selectedDate.getHours()
-        : selectedDate.getHours();
+      endSelectedDate.getHours() === 0
+        ? endSelectedDate.getHours() + "0"
+        : endSelectedDate.getHours() < 10
+        ? "0" + endSelectedDate.getHours()
+        : endSelectedDate.getHours();
     let minutes =
-      selectedDate.getMinutes() === 0
-        ? selectedDate.getMinutes() + "0"
-        : selectedDate.getMinutes() < 10
-        ? "0" + selectedDate.getMinutes()
-        : selectedDate.getMinutes();
+      endSelectedDate.getMinutes() === 0
+        ? endSelectedDate.getMinutes() + "0"
+        : endSelectedDate.getMinutes() < 10
+        ? "0" + endSelectedDate.getMinutes()
+        : endSelectedDate.getMinutes();
     let seconds =
-      selectedDate.getSeconds() === 0
-        ? selectedDate.getSeconds() + "0"
-        : selectedDate.getSeconds() < 10
-        ? "0" + selectedDate.getSeconds()
-        : selectedDate.getSeconds();
+      endSelectedDate.getSeconds() === 0
+        ? endSelectedDate.getSeconds() + "0"
+        : endSelectedDate.getSeconds() < 10
+        ? "0" + endSelectedDate.getSeconds()
+        : endSelectedDate.getSeconds();
     this.setState({
-      endFormatted: `${selectedDate.getFullYear()}-${months}-${days}T${hours}:${minutes}:${seconds}Z`,
+      endFormatted: `${endSelectedDate.getFullYear()}-${months}-${days}T${hours}:${minutes}:${seconds}Z`,
       endUnix: unixEndDate
     });
   };
 
   onHandleSubmit = (event, makecall) => {
     event.preventDefault();
-    const { location, startFormatted, term, endFormatted, radius } = this.state;
+    const {
+      location,
+      startFormatted,
+      term,
+      endFormatted,
+
+      radius
+    } = this.state;
     if (term === "" && location === "" && startFormatted === "") {
       alert("Must enter in a term, time, and location");
     } else if (term === "" && location === "" && startFormatted !== "") {
@@ -120,9 +127,24 @@ class SearchBox extends Component {
     } else if (location === "" && startFormatted !== "" && term !== "") {
       alert("Must enter in a location");
     } else {
-      makecall(term, location, startFormatted, endFormatted, radius);
+      makecall(
+        term,
+        location,
+
+        startFormatted,
+        endFormatted,
+        radius
+      );
     }
-    this.setState({ term: "", location: "", startFormatted: "", radius: "" });
+    this.setState({
+      term: "",
+      location: "",
+      endFormatted: "",
+      endUnix: null,
+      startUnix: null,
+      startFormatted: "",
+      radius: ""
+    });
   };
 
   render() {
@@ -153,7 +175,7 @@ class SearchBox extends Component {
                 <label htmlFor="">When are you meeting?</label>
                 <DatePicker
                   name="date"
-                  selected={this.state.date}
+                  selected={this.state.startDate}
                   onChange={this.handleStartDateChange}
                   showTimeSelect
                   dateFormat="Pp"
@@ -162,7 +184,7 @@ class SearchBox extends Component {
                 <label htmlFor="">When is the end of the date?</label>
                 <DatePicker
                   name="date"
-                  selected={this.state.date}
+                  selected={this.state.endDate}
                   onChange={this.handleEndDateChange}
                   showTimeSelect
                   dateFormat="Pp"
