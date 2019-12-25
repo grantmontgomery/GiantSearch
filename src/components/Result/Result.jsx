@@ -196,7 +196,7 @@ class Result extends Component {
           {value => (
             <div className="resultBox">
               <div className="image-wrapper">
-                <img src={this.state.image} alt="" />
+                <img src={this.props.Result.image_url} alt="" />
               </div>
               <button
                 className={this.state.buttonSwitch}
@@ -210,11 +210,13 @@ class Result extends Component {
                 <ul>
                   <li>
                     <a href={this.props.Result.event_site_url} target="_blank">
-                      {this.state.Result.name}
+                      {this.props.Result.name}
                     </a>
                   </li>
-                  <li>{this.state.date}</li>
-                  <li>{this.state.location}</li>
+                  <li>{this.props.Result.time_start}</li>
+                  <li>{`${this.props.Result.location.address1.toLowerCase()}, ${
+                    this.props.Result.location.city
+                  }`}</li>
                 </ul>
               </div>
             </div>

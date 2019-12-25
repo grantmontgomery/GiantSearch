@@ -61,13 +61,16 @@ class App extends Component {
           .then(res => res.json())
           .then(yelpEventsData => {
             const { events } = yelpEventsData;
-            events.forEach(
+            console.log(events);
+            const noKids = events.filter(
+              event => event.category !== "kids-family"
+            );
+            noKids.forEach(
               event => ((event.source = "yelp"), (event.type = "event"))
             );
-            console.log(events);
-            // this.setState(() => ({
-            //   Events: [...this.state.Events, ...events]
-            // }));
+            this.setState(() => ({
+              Events: [...this.state.Events, ...noKids]
+            }));
           });
         fetch("http://localhost:5000/ticketMasterSearch", {
           headers: {
@@ -100,6 +103,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.Events);
     return (
       <AppContext.Provider value={this.state}>
         <div>
