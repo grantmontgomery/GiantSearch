@@ -61,7 +61,6 @@ class App extends Component {
           .then(res => res.json())
           .then(yelpEventsData => {
             const { events } = yelpEventsData;
-            console.log(events);
             const noKids = events.filter(
               event => event.category !== "kids-family"
             );
@@ -103,7 +102,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.Events);
     return (
       <AppContext.Provider value={this.state}>
         <div>
