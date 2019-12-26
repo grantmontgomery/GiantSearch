@@ -85,6 +85,7 @@ class Result extends Component {
             <div className="image-wrapper">
               <img src={this.props.Result.image_url} className="" alt="" />
             </div>
+            <button className="more-info">...</button>
             <button
               className={this.state.buttonSwitch}
               onClick={() => this.changeButton(value.addPart, value.removePart)}
@@ -113,38 +114,7 @@ class Result extends Component {
       return <li>Starting at: ${this.state.price}.00</li>;
     }
   };
-  // eventRender = () => {
-  //   return (
-  //     <AppContext.Consumer>
-  //       {value => (
-  //         <div className="resultBox">
-  //           <div className="image-wrapper">
-  //             <img src={this.props.Result.images[0].url} alt="" />
-  //           </div>
-  //           <button
-  //             className={this.state.buttonSwitch}
-  //             onClick={() => this.changeButton(value.addPart, value.removePart)}
-  //           >
-  //             {this.state.AddRemove}
-  //           </button>
-  //           <div className="text-wrapper">
-  //             <ul>
-  //               <li>
-  //                 <a href={this.props.Result.url} target="_blank">
-  //                   {this.props.Result.name}
-  //                 </a>
-  //               </li>
-  //               <li>{this.props.Result.dates.start.localDate}</li>
-  //               <li>{this.props.Result.dates.start.localTime}</li>
-  //               <li>{this.props.Result._embedded.venues[0].name}</li>
-  //               {this.renderPrice()}
-  //             </ul>
-  //           </div>
-  //         </div>
-  //       )}
-  //     </AppContext.Consumer>
-  //   );
-  // };
+
   eventRender = () => {
     if (this.state.source === "ticketmaster") {
       return (
@@ -154,6 +124,7 @@ class Result extends Component {
               <div className="image-wrapper">
                 <img src={this.props.Result.images[0].url} alt="" />
               </div>
+              <button className="more-info">...</button>
               <button
                 className={this.state.buttonSwitch}
                 onClick={() =>
@@ -181,23 +152,13 @@ class Result extends Component {
       );
     } else {
       return (
-        // name: props.Result.name,
-        //   date: props.Result.time_start,
-        //   id: props.Result.id,
-        //   image: props.Result.image_url,
-        //   type: props.Result.type,
-        //   location: `${props.Result.location.address1.toLowerCase()}, ${
-        //     props.Result.location.city
-        //   }`,
-        //   source: props.Result.source,
-        //   AddRemove: "+",
-        //   buttonSwitch: "add"
         <AppContext.Consumer>
           {value => (
             <div className="resultBox">
               <div className="image-wrapper">
                 <img src={this.props.Result.image_url} alt="" />
               </div>
+              <button className="more-info">...</button>
               <button
                 className={this.state.buttonSwitch}
                 onClick={() =>
