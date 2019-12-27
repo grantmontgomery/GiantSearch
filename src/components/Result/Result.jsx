@@ -13,6 +13,7 @@ class Result extends Component {
         image: props.Result.image_url,
         id: props.Result.id,
         location: props.Result.location,
+        animate: "",
         type: props.Result.type,
         price: props.Result.price,
         rating: props.Result.rating
@@ -24,6 +25,7 @@ class Result extends Component {
               name: props.Result.name,
               date: props.Result.dates.start.localDate,
               time: props.Result.dates.start.localTime,
+              animate: "",
               id: props.Result.id,
               type: props.Result.type,
               image: props.Result.images[0].url,
@@ -38,6 +40,7 @@ class Result extends Component {
               date: props.Result.dates.start.localDate,
               time: props.Result.dates.start.localTime,
               id: props.Result.id,
+              animate: "",
               image: props.Result.images[0].url,
               type: props.Result.type,
               source: props.Result.source,
@@ -49,6 +52,7 @@ class Result extends Component {
         this.state = {
           name: props.Result.name,
           date: props.Result.time_start,
+          animate: "",
           id: props.Result.id,
           image: props.Result.image_url,
           type: props.Result.type,
@@ -62,6 +66,14 @@ class Result extends Component {
       }
     }
   }
+
+  flipCard = event => {
+    event.preventDefault();
+    const { animate } = this.state;
+    animate === ""
+      ? this.setState({ animate: "flip" })
+      : this.setState({ animate: "" });
+  };
 
   changeButton = (addfunction, removefunction) => {
     if (this.state.AddRemove === "+") {
@@ -81,28 +93,40 @@ class Result extends Component {
     return (
       <AppContext.Consumer>
         {value => (
-          <div className="resultBox">
-            <div className="image-wrapper">
-              <img src={this.props.Result.image_url} className="" alt="" />
-            </div>
-            <button className="more-info">...</button>
-            <button
-              className={this.state.buttonSwitch}
-              onClick={() => this.changeButton(value.addPart, value.removePart)}
-            >
-              {this.state.AddRemove}
-            </button>
-            <div className="text-wrapper">
-              <ul>
-                <li>
-                  <a href={this.props.Result.url} target="_blank">
-                    {this.props.Result.name}
-                  </a>
-                </li>
-                <li>{this.props.Result.location.city}</li>
-                <li>{this.props.Result.rating}</li>
-                <li>{this.props.Result.price}</li>
-              </ul>
+          <div
+            className={`resultBox ${this.state.animate}`}
+            onClick={this.flipCard}
+          >
+            <div className="result-inner">
+              <div className="result-front">
+                {" "}
+                <div className="image-wrapper">
+                  <img src={this.props.Result.image_url} className="" alt="" />
+                </div>
+                <button
+                  className={this.state.buttonSwitch}
+                  onClick={() =>
+                    this.changeButton(value.addPart, value.removePart)
+                  }
+                >
+                  {this.state.AddRemove}
+                </button>
+                <div className="text-wrapper">
+                  <ul>
+                    <li>
+                      <a href={this.props.Result.url} target="_blank">
+                        {this.props.Result.name}
+                      </a>
+                    </li>
+                    <li>{this.props.Result.location.city}</li>
+                    <li>{this.props.Result.rating}</li>
+                    <li>{this.props.Result.price}</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="result-back">
+                <p></p>
+              </div>
             </div>
           </div>
         )}
@@ -120,31 +144,39 @@ class Result extends Component {
       return (
         <AppContext.Consumer>
           {value => (
-            <div className="resultBox">
-              <div className="image-wrapper">
-                <img src={this.props.Result.images[0].url} alt="" />
-              </div>
-              <button className="more-info">...</button>
-              <button
-                className={this.state.buttonSwitch}
-                onClick={() =>
-                  this.changeButton(value.addPart, value.removePart)
-                }
-              >
-                {this.state.AddRemove}
-              </button>
-              <div className="text-wrapper">
-                <ul>
-                  <li>
-                    <a href={this.props.Result.url} target="_blank">
-                      {this.props.Result.name}
-                    </a>
-                  </li>
-                  <li>{this.props.Result.dates.start.localDate}</li>
-                  <li>{this.props.Result.dates.start.localTime}</li>
-                  <li>{this.props.Result._embedded.venues[0].name}</li>
-                  {this.renderPrice()}
-                </ul>
+            <div
+              className={`resultBox ${this.state.animate}`}
+              onClick={this.flipCard}
+            >
+              <div className="result-inner">
+                <div className="result-front">
+                  <div className="image-wrapper">
+                    <img src={this.props.Result.images[0].url} alt="" />
+                  </div>
+                  <button className="more-info">...</button>
+                  <button
+                    className={this.state.buttonSwitch}
+                    onClick={() =>
+                      this.changeButton(value.addPart, value.removePart)
+                    }
+                  >
+                    {this.state.AddRemove}
+                  </button>
+                  <div className="text-wrapper">
+                    <ul>
+                      <li>
+                        <a href={this.props.Result.url} target="_blank">
+                          {this.props.Result.name}
+                        </a>
+                      </li>
+                      <li>{this.props.Result.dates.start.localDate}</li>
+                      <li>{this.props.Result.dates.start.localTime}</li>
+                      <li>{this.props.Result._embedded.venues[0].name}</li>
+                      {this.renderPrice()}
+                    </ul>
+                  </div>
+                </div>
+                <div className="result-back"></div>
               </div>
             </div>
           )}
@@ -154,30 +186,38 @@ class Result extends Component {
       return (
         <AppContext.Consumer>
           {value => (
-            <div className="resultBox">
-              <div className="image-wrapper">
-                <img src={this.props.Result.image_url} alt="" />
-              </div>
-              <button
-                className={this.state.buttonSwitch}
-                onClick={() =>
-                  this.changeButton(value.addPart, value.removePart)
-                }
-              >
-                {this.state.AddRemove}
-              </button>
-              <div className="text-wrapper">
-                <ul>
-                  <li>
-                    <a href={this.props.Result.event_site_url} target="_blank">
-                      {this.props.Result.name}
-                    </a>
-                  </li>
-                  <li>{this.props.Result.time_start}</li>
-                  <li>{`${this.props.Result.location.address1.toLowerCase()}, ${
-                    this.props.Result.location.city
-                  }`}</li>
-                </ul>
+            <div className={`resultBox ${this.flipCard}`}>
+              <div className="result-inner">
+                <div className="result-front">
+                  <div className="image-wrapper">
+                    <img src={this.props.Result.image_url} alt="" />
+                  </div>
+                  <button
+                    className={this.state.buttonSwitch}
+                    onClick={() =>
+                      this.changeButton(value.addPart, value.removePart)
+                    }
+                  >
+                    {this.state.AddRemove}
+                  </button>
+                  <div className="text-wrapper">
+                    <ul>
+                      <li>
+                        <a
+                          href={this.props.Result.event_site_url}
+                          target="_blank"
+                        >
+                          {this.props.Result.name}
+                        </a>
+                      </li>
+                      <li>{this.props.Result.time_start}</li>
+                      <li>{`${this.props.Result.location.address1.toLowerCase()}, ${
+                        this.props.Result.location.city
+                      }`}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="result-back"></div>
               </div>
             </div>
           )}

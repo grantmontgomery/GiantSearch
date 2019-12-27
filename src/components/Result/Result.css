@@ -1,9 +1,37 @@
 .resultBox {
   height: 250px;
   width: 200px;
-  border: 1px solid black;
   margin: 5px;
+  cursor: pointer;
   overflow: hidden;
+  transition: transform 1s;
+  perspective: 1000px;
+}
+
+.result-inner {
+  height: 100%;
+  border: 1px solid black;
+  width: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.result-front,
+.result-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.result-back {
+  transform: rotateY(180deg);
+  background: white;
+}
+
+.flip .result-inner {
+  transform: rotateY(180deg);
+  transition: transform 1s;
 }
 
 .image-wrapper img {
