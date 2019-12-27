@@ -70,9 +70,16 @@ class Result extends Component {
   flipCard = event => {
     event.preventDefault();
     const { animate } = this.state;
-    animate === ""
-      ? this.setState({ animate: "flip" })
-      : this.setState({ animate: "" });
+    const { target } = event;
+    if (
+      target.className !== "add" &&
+      target.className !== "remove" &&
+      target.className !== "url"
+    ) {
+      animate === ""
+        ? this.setState({ animate: "flip" })
+        : this.setState({ animate: "" });
+    }
   };
 
   changeButton = (addfunction, removefunction) => {
@@ -114,7 +121,11 @@ class Result extends Component {
                 <div className="text-wrapper">
                   <ul>
                     <li>
-                      <a href={this.props.Result.url} target="_blank">
+                      <a
+                        href={this.props.Result.url}
+                        className="url"
+                        target="_blank"
+                      >
                         {this.props.Result.name}
                       </a>
                     </li>
@@ -165,7 +176,11 @@ class Result extends Component {
                   <div className="text-wrapper">
                     <ul>
                       <li>
-                        <a href={this.props.Result.url} target="_blank">
+                        <a
+                          href={this.props.Result.url}
+                          className="url"
+                          target="_blank"
+                        >
                           {this.props.Result.name}
                         </a>
                       </li>
@@ -204,6 +219,7 @@ class Result extends Component {
                     <ul>
                       <li>
                         <a
+                          className="url"
                           href={this.props.Result.event_site_url}
                           target="_blank"
                         >
