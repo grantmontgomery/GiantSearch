@@ -158,7 +158,6 @@ class Result extends Component {
               <div className="image-wrapper">
                 <img src={this.props.Result.image_url} alt="" />
               </div>
-              <button className="more-info">...</button>
               <button
                 className={this.state.buttonSwitch}
                 onClick={() =>

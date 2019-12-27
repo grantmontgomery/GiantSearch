@@ -28,23 +28,6 @@
   z-index: 1;
 }
 
-.more-info {
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  background: rgb(200, 200, 200);
-  height: 30px;
-  width: 30px;
-  color: white;
-  margin-left: 5px;
-  float: right;
-  right: 5px;
-  border: none;
-  text-align: center;
-  top: 85px;
-  z-index: 1;
-}
-
 .remove {
   border-radius: 6px;
   background: red;
