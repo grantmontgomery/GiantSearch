@@ -71,6 +71,7 @@ class Result extends Component {
     event.preventDefault();
     const { animate } = this.state;
     const { target } = event;
+    const resultCards = document.getElementsByClassName("resultBox");
     if (
       target.className !== "add" &&
       target.className !== "remove" &&
@@ -201,7 +202,10 @@ class Result extends Component {
       return (
         <AppContext.Consumer>
           {value => (
-            <div className={`resultBox ${this.flipCard}`}>
+            <div
+              className={`resultBox ${this.state.animate}`}
+              onClick={this.flipCard}
+            >
               <div className="result-inner">
                 <div className="result-front">
                   <div className="image-wrapper">

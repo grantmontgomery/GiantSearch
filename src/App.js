@@ -13,6 +13,8 @@ class App extends Component {
       Venues: [],
       Events: [],
       Parts: [],
+      venuesLoading: false,
+      eventsLoading: false,
       makeCall: this.makeCall,
       addPart: this.addPart,
       removePart: this.removePart
@@ -38,6 +40,8 @@ class App extends Component {
     endUnix,
     startUnix
   ) => {
+    this.setState({ venuesLoading: true });
+    this.setState({ eventsLoading: true });
     fetch("http://localhost:5000/yelpBusinessSearch", {
       headers: {
         Accept: "application/json",
@@ -87,23 +91,31 @@ class App extends Component {
               event => ((event.source = "ticketmaster"), (event.type = "event"))
             );
             this.setState(() => ({
+              venuesLoading: false,
+              eventsLoading: false,
               Venues: [...businesses],
               Events: [...this.state.Events, ...events]
             }));
           })
           .catch(err => {
             this.setState({
+              eventsLoading: false,
+              venuesLoading: false,
               Venues: [...businesses]
             });
+            this.setState({ venuesLoading: false, eventsLoading: false });
             console.log(err.message);
           });
       })
-      .catch(err => console.log(err.message));
+      .catch(err => {
+        this.setState({ eventsLoading: false, venuesLoading: false });
+        console.log(err.message);
+      });
   };
 
   render() {
-    console.log(this.state.Events);
-    console.log(this.state.Venues);
+    console.log(this.state.eventsLoading);
+    console.log(this.state.venuesLoading);
     return (
       <AppContext.Provider value={this.state}>
         <div>
