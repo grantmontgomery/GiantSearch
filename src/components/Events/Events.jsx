@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Result } from "../Result";
+import { AppContext } from "../../AppContext";
 import "./Events.css";
 
 class Events extends Component {
@@ -55,7 +56,17 @@ class Events extends Component {
     }
   };
   render() {
-    return <div className="events"> {this.eventsRender()} </div>;
+    return (
+      <AppContext.Consumer>
+        {value => {
+          if (value.eventsLoading) {
+            return <div className="events">Events are loading...</div>;
+          } else {
+            return <div className="events">{this.eventsRender()}</div>;
+          }
+        }}
+      </AppContext.Consumer>
+    );
   }
 }
 

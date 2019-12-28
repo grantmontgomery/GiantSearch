@@ -36,41 +36,40 @@ class Venues extends Component {
     const { index } = this.state;
     if (Venues.length > 0) {
       return (
-        <AppContext.Consumer>
-          {value => {
-            if (value.venuesLoading) {
-              this.renderIsLoading();
-            } else {
-              return (
-                <div className="venues-slider">
-                  <button id="previous" onClick={e => this.previousItems(e)}>
-                    {"<"}
-                  </button>
-                  <div
-                    className="venues-wrapper"
-                    style={{
-                      transform: `translateX(-${index *
-                        (100 / Venues.length)}%)`
-                    }}
-                  >
-                    {Venues.map(result => {
-                      return <Result key={result.id} Result={result}></Result>;
-                    })}
-                  </div>
-                  <button id="next" onClick={e => this.nextItems(e)}>
-                    {">"}
-                  </button>
-                </div>
-              );
-            }
-          }}
-        </AppContext.Consumer>
+        <div className="venues-slider">
+          <button id="previous" onClick={e => this.previousItems(e)}>
+            {"<"}
+          </button>
+          <div
+            className="venues-wrapper"
+            style={{
+              transform: `translateX(-${index * (100 / Venues.length)}%)`
+            }}
+          >
+            {Venues.map(result => {
+              return <Result key={result.id} Result={result}></Result>;
+            })}
+          </div>
+          <button id="next" onClick={e => this.nextItems(e)}>
+            {">"}
+          </button>
+        </div>
       );
     }
   };
 
   render() {
-    return <div className="venues">{this.venuesRender()}</div>;
+    return (
+      <AppContext.Consumer>
+        {value => {
+          if (value.venuesLoading) {
+            return <div className="venues">Venues are loading...</div>;
+          } else {
+            return <div className="venues">{this.venuesRender()}</div>;
+          }
+        }}
+      </AppContext.Consumer>
+    );
   }
 }
 
