@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Result } from "../Result";
 import { AppContext } from "../../AppContext";
+// import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 import "./Venues.css";
 
 class Venues extends Component {
@@ -31,6 +33,16 @@ class Venues extends Component {
       ? this.setState(() => ({ index: index - 4 }))
       : this.setState(() => ({ index: 0 }));
   };
+
+  // applyTransitions = () => {
+  //   const { Venues } = this.props;
+  //   return Venues.map(result => (
+  //     <CSSTransition key={result.id} timeout={300} classNames="enter-transitions">
+  //       <Result key={result.id} Result={result}></Result>;
+  //     </CSSTransition>
+  //   ));
+  // };
+
   venuesRender = () => {
     const { Venues } = this.props;
     const { index } = this.state;
