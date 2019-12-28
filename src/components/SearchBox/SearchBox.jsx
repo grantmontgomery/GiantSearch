@@ -192,16 +192,22 @@ class SearchBox extends Component {
         {value => {
           return (
             <div className="searchbox">
+              Search for Places and Events
+              <br />
+              <br />
               <form action="">
-                <label htmlFor="">Search</label>
+                <label htmlFor="">
+                  What type of places are you looking for?
+                </label>
                 <input
                   type="text"
                   name="term"
                   value={this.state.term}
+                  placeholder="Bars, restaurants, lounges, etc."
                   onChange={e => this.updateTextInput(e)}
                 />
                 <br />
-                <label htmlFor="">Location</label>
+                <label htmlFor="">Where are you meeting?</label>
                 <input
                   name="location"
                   type="text"
@@ -231,7 +237,7 @@ class SearchBox extends Component {
                   dateFormat="Pp"
                 ></DatePicker>
                 <br />
-                <label htmlFor="">Radius</label>
+                <label htmlFor="">What's the area of your search?</label>
                 <select name="radius" id="" onChange={this.handleRadiusChange}>
                   <option value="none">Select miles...</option>
                   <option value="1610">Within 1 mile</option>
@@ -243,6 +249,11 @@ class SearchBox extends Component {
                   Submit
                 </button>
               </form>
+              <br />
+              <br />
+              <label htmlFor="">Just looking for places?</label>
+              <br />
+              <label htmlFor="">Just events?</label>
             </div>
           );
         }}
@@ -252,3 +263,19 @@ class SearchBox extends Component {
 }
 
 export default SearchBox;
+// import React, { Component } from "react";
+// import "./SearchBox.css";
+
+// class SearchBox extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {};
+//   }
+//   render() {
+//     return <div className="searchbox">
+//       <span></span>
+//     </div>;
+//   }
+// }
+
+// export default SearchBox;
