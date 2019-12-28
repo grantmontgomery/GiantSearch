@@ -31,88 +31,6 @@ class App extends Component {
     });
   };
 
-  // makeCall = (
-  //   term,
-  //   location,
-  //   startFormatted,
-  //   endFormatted,
-  //   radius,
-  //   endUnix,
-  //   startUnix
-  // ) => {
-  //   this.setState({ venuesLoading: true });
-  //   this.setState({ eventsLoading: true });
-  //   fetch("http://localhost:5000/yelpBusinessSearch", {
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json"
-  //     },
-  //     method: "POST",
-  //     body: JSON.stringify({ term, location, radius })
-  //   })
-  //     .then(res => res.json())
-  //     .then(yelpBusinessData => {
-  //       const { businesses } = yelpBusinessData;
-  //       businesses.forEach(business => (business["type"] = "venue"));
-  //       fetch("http://localhost:5000/yelpEventSearch", {
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json"
-  //         },
-  //         method: "POST",
-  //         body: JSON.stringify({ location, radius, startUnix, endUnix })
-  //       })
-  //         .then(res => res.json())
-  //         .then(yelpEventsData => {
-  //           const { events } = yelpEventsData;
-  //           const noKids = events.filter(
-  //             event => event.category !== "kids-family"
-  //           );
-  //           noKids.forEach(
-  //             event => ((event.source = "yelp"), (event.type = "event"))
-  //           );
-  //           this.setState(() => ({
-  //             Events: [...this.state.Events, ...noKids]
-  //           }));
-  //         });
-  //       fetch("http://localhost:5000/ticketMasterSearch", {
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json"
-  //         },
-  //         method: "POST",
-  //         body: JSON.stringify({ location, startFormatted, endFormatted })
-  //       })
-  //         .then(res => res.json())
-  //         .then(data => {
-  //           const { _embedded } = data;
-  //           const { events } = _embedded;
-  //           events.forEach(
-  //             event => ((event.source = "ticketmaster"), (event.type = "event"))
-  //           );
-  //           this.setState(() => ({
-  //             venuesLoading: false,
-  //             eventsLoading: false,
-  //             Venues: [...businesses],
-  //             Events: [...this.state.Events, ...events]
-  //           }));
-  //         })
-  //         .catch(err => {
-  //           this.setState({
-  //             eventsLoading: false,
-  //             venuesLoading: false,
-  //             Venues: [...businesses]
-  //           });
-  //           this.setState({ venuesLoading: false, eventsLoading: false });
-  //           console.log(err.message);
-  //         });
-  //     })
-  //     .catch(err => {
-  //       this.setState({ eventsLoading: false, venuesLoading: false });
-  //       console.log(err.message);
-  //     });
-  // };
-
   makeCall = async (
     term,
     location,
@@ -122,69 +40,86 @@ class App extends Component {
     endUnix,
     startUnix
   ) => {
-    this.setState({ venuesLoading: true });
-    this.setState({ eventsLoading: true });
-    let yelpBusinesses = await fetch(
-      "http://localhost:5000/yelpBusinessSearch",
-      {
+    try {
+      this.setState({
+        venuesLoading: true,
+        eventsLoading: true,
+        Events: [],
+        Venues: []
+      });
+      let yelpBusinesses = await fetch(
+        "http://localhost:5000/yelpBusinessSearch",
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({ term, location, radius })
+        }
+      );
+      let yelpBusinessesData = await yelpBusinesses.json();
+      const { businesses } = yelpBusinessesData;
+      businesses.forEach(business => (business["type"] = "venue"));
+
+      this.setState({ Venues: [...businesses], venuesLoading: false });
+    } catch {
+      this.setState({ businessErrors: true, venuesLoading: false });
+    }
+    try {
+      let yelpEvents = await fetch("http://localhost:5000/yelpEventSearch", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
         method: "POST",
-        body: JSON.stringify({ term, location, radius })
-      }
-    );
-    let yelpBusinessesData = await yelpBusinesses.json();
-    const { businesses } = yelpBusinessesData;
-    businesses.forEach(business => (business["type"] = "venue"));
+        body: JSON.stringify({ location, radius, startUnix, endUnix })
+      });
 
-    this.setState({ Venues: [...businesses], venuesLoading: false });
-    let yelpEvents = await fetch("http://localhost:5000/yelpEventSearch", {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      method: "POST",
-      body: JSON.stringify({ location, radius, startUnix, endUnix })
-    });
+      let yelpEventsData = (await yelpEvents.json()).events.filter(
+        event => event.category !== "kids-family"
+      );
 
-    let yelpEventsData = await yelpEvents.json();
-    let noKids = yelpEventsData
-      .filter(event => event.category !== "kids-family")
-      .forEach(event => ((event.source = "yelp"), (event.type = "event")));
+      yelpEventsData.forEach(
+        event => ((event.source = "yelp"), (event.type = "event"))
+      );
 
-    this.setState({ Events: [...noKids] });
+      this.setState({ Events: [...yelpEventsData] });
+    } catch {
+      this.setState({ yelpEventsError: true });
+    }
+    try {
+      let ticketMasterEvents = await fetch(
+        "http://localhost:5000/ticketMasterSearch",
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({ location, startFormatted, endFormatted })
+        }
+      );
 
-    let ticketMasterEvents = await fetch(
-      "http://localhost:5000/ticketMasterSearch",
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        method: "POST",
-        body: JSON.stringify({ location, startFormatted, endFormatted })
-      }
-    );
+      let ticketMasterResponse = await ticketMasterEvents.json();
 
-    let ticketMasterResponse = await ticketMasterEvents.json();
+      const { _embedded } = ticketMasterResponse;
+      const { events } = _embedded;
+      events.forEach(
+        event => ((event.source = "ticketmaster"), (event.type = "event"))
+      );
 
-    const { _embedded } = ticketMasterResponse;
-    const { events } = _embedded;
-    events.forEach(
-      event => ((event.source = "ticketmaster"), (event.type = "event"))
-    );
-
-    this.setState(() => ({
-      Events: [...this.state.Events, ...events],
-      eventsLoading: false
-    }));
+      this.setState(() => ({
+        Events: [...this.state.Events, ...events],
+        eventsLoading: false
+      }));
+    } catch {
+      this.setState({ ticketMasterError: true, eventsLoading: false });
+    }
   };
 
   render() {
-    console.log(this.state.eventsLoading);
-    console.log(this.state.venuesLoading);
+    console.log(this.state);
     return (
       <AppContext.Provider value={this.state}>
         <div>
