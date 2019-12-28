@@ -25,20 +25,6 @@ class Parts extends Component {
       </CSSTransition>
     ));
   };
-  // renderDropdown = list => {
-  //   let { dropdown } = this.state;
-  //   if (dropdown === false) {
-  //     return (
-  //       <div className="parts-dropdown scrollbar">
-  //         <div className="parts-wrapper">
-  //           <ul>{this.applyTransitions(list)}</ul>
-  //         </div>
-  //       </div>
-  //     );
-  //   } else {
-  //     return <React.Fragment></React.Fragment>;
-  //   }
-  // };
 
   renderPartsNotifications = list => {
     if (list.length > 0) {
