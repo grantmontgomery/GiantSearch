@@ -12,10 +12,15 @@ class SearchBox extends Component {
     super(props);
     this.state = {
       term: "",
-      renderVenuesSearch: true
+      renderVenuesSearch: true,
+      searchAll: true,
+      justEvents: false,
+      justVenues: false
     };
   }
-
+  componentDidMount() {
+    document.getElementById("searchAll").checked = true;
+  }
   updateTextInput = event => {
     this.setState({ term: event.target.value });
   };
@@ -28,12 +33,36 @@ class SearchBox extends Component {
 
   VenuesSearch = event => {
     const { target } = event;
-    if (target.checked === false) {
-      target.checked = true;
-      this.setState({ renderVenuesSearch: false });
-    } else {
-      target.checked = false;
-      this.setState({ renderVenuesSearch: true });
+    if (target === document.getElementById("justEvents")) {
+      document.getElementById("justEvents").checked = true;
+      document.getElementById("justVenues").checked = false;
+      document.getElementById("searchAll").checked = false;
+      this.setState({
+        renderVenuesSearch: false,
+        justEvents: true,
+        justVenues: false,
+        searchAll: false
+      });
+    } else if (target === document.getElementById("justVenues")) {
+      document.getElementById("justVenues").checked = true;
+      document.getElementById("justEvents").checked = false;
+      document.getElementById("searchAll").checked = false;
+      this.setState({
+        renderVenuesSearch: true,
+        justVenues: true,
+        justEvents: false,
+        searchAll: false
+      });
+    } else if (target === document.getElementById("searchAll")) {
+      document.getElementById("searchAll").checked = true;
+      document.getElementById("justEvents").checked = false;
+      document.getElementById("searchAll").checked = false;
+      this.setState({
+        renderVenuesSearch: true,
+        justVenues: false,
+        justEvents: false,
+        searchAll: true
+      });
     }
   };
 
@@ -204,7 +233,12 @@ class SearchBox extends Component {
   renderVenuesSearch = () => {
     const { renderVenuesSearch } = this.state;
     if (renderVenuesSearch) {
-      return <VenuesSearch></VenuesSearch>;
+      return (
+        <VenuesSearch
+          updateTextInput={this.updateTextInput}
+          term={this.state.term}
+        ></VenuesSearch>
+      );
     } else {
       return;
     }
@@ -220,11 +254,27 @@ class SearchBox extends Component {
               Search for Places and Events
               <br />
               <br />
+              <span>What are you looking for?</span>
+              <br />
+              <label htmlFor="">I'm looking for anything.</label>
+              <input type="radio" id="searchAll" onChange={this.VenuesSearch} />
+              <br />
+              <label htmlFor="">I'm just looking for cool places.</label>
+              <input
+                type="radio"
+                id="justVenues"
+                onChange={this.VenuesSearch}
+              />
+              <br />
+              <label htmlFor="">I'm only looking for what's poppin'</label>
+              <input
+                type="radio"
+                id="justEvents"
+                onChange={this.VenuesSearch}
+              />
+              <br />
               <form action="">
-                <VenuesSearch
-                  updateTextInput={this.updateTextInput}
-                  term={this.state.term}
-                ></VenuesSearch>
+                {this.renderVenuesSearch()}
                 {/* <label htmlFor="">
                   What type of places are you looking for?
                 </label>
@@ -278,13 +328,6 @@ class SearchBox extends Component {
                   Submit
                 </button>
               </form>
-              <br />
-              <br />
-              <label htmlFor="">Just looking for places?</label>
-              <input type="radio" />
-              <br />
-              <label htmlFor="">Just events?</label>
-              <input type="radio" onChange={this.VenuesSearch} />
             </div>
           );
         }}
