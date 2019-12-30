@@ -3,23 +3,21 @@ import React, { Component } from "react";
 class VenuesSearch extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      term: ""
-    };
   }
 
-  handleUpdate = event => {
-    const { target } = event;
-    const { value } = target;
-    this.setState({ term: value });
-  };
-
   render() {
-    const { term } = this.state;
+    const { updateTextInput, term } = this.props;
     return (
-      <div className="venuessearch-wrapper">
-        <input type="text" value={term} onChange={this.handleUpdate} />
-      </div>
+      <React.Fragment>
+        <label htmlFor="">What type of places are you looking for?</label>
+        <input
+          type="text"
+          name="term"
+          value={term}
+          placeholder="Bars, restaurants, lounges, etc."
+          onChange={updateTextInput}
+        />
+      </React.Fragment>
     );
   }
 }

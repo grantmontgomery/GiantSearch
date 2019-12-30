@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { AppContext } from "../../AppContext";
 import DatePicker from "react-datepicker";
+import { VenuesSearch } from "../VenuesSearch";
 import "react-datepicker/dist/react-datepicker.css";
 import "./SearchBox.css";
 
@@ -9,17 +10,31 @@ require("dotenv").config();
 class SearchBox extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      term: "",
+      renderVenuesSearch: true
+    };
   }
 
   updateTextInput = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ term: event.target.value });
   };
 
   handleRadiusChange = event => {
     const { target } = event;
     const valuetoInt = parseInt(target.value);
     this.setState({ [target.name]: valuetoInt });
+  };
+
+  VenuesSearch = event => {
+    const { target } = event;
+    if (target.checked === false) {
+      target.checked = true;
+      this.setState({ renderVenuesSearch: false });
+    } else {
+      target.checked = false;
+      this.setState({ renderVenuesSearch: true });
+    }
   };
 
   handleStartDateChange = date => {
@@ -186,7 +201,17 @@ class SearchBox extends Component {
     });
   };
 
+  renderVenuesSearch = () => {
+    const { renderVenuesSearch } = this.state;
+    if (renderVenuesSearch) {
+      return <VenuesSearch></VenuesSearch>;
+    } else {
+      return;
+    }
+  };
+
   render() {
+    console.log(this.state);
     return (
       <AppContext.Consumer>
         {value => {
@@ -196,7 +221,11 @@ class SearchBox extends Component {
               <br />
               <br />
               <form action="">
-                <label htmlFor="">
+                <VenuesSearch
+                  updateTextInput={this.updateTextInput}
+                  term={this.state.term}
+                ></VenuesSearch>
+                {/* <label htmlFor="">
                   What type of places are you looking for?
                 </label>
                 <input
@@ -205,7 +234,7 @@ class SearchBox extends Component {
                   value={this.state.term}
                   placeholder="Bars, restaurants, lounges, etc."
                   onChange={e => this.updateTextInput(e)}
-                />
+                /> */}
                 <br />
                 <label htmlFor="">Where are you meeting?</label>
                 <input
@@ -252,8 +281,10 @@ class SearchBox extends Component {
               <br />
               <br />
               <label htmlFor="">Just looking for places?</label>
+              <input type="radio" />
               <br />
               <label htmlFor="">Just events?</label>
+              <input type="radio" onChange={this.VenuesSearch} />
             </div>
           );
         }}
