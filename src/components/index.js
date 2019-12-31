@@ -4,5 +4,5 @@ export { Parts } from "./Parts";
 
 // API CALLS
 
-export { EventsSearch } from "./API Calls";
-export { VenuesSearch } from "./API Calls";
+export { EventsAPI } from "./API Calls";
+export { VenuesAPI } from "./API Calls";

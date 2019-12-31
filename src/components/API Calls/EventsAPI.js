@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 const EventsAPI = async (
   loading,
   notLoading,
