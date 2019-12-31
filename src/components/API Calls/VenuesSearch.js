@@ -1,4 +1,4 @@
-const justVenues = async ({
+const VenuesSearch = async ({
   term,
   location,
   startFormatted,
@@ -32,3 +32,5 @@ const justVenues = async ({
     return;
   }
 };
+
+export default VenuesSearch;

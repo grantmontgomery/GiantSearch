@@ -1,4 +1,4 @@
-const justEvents = async ({
+const EventsSearch = async ({
   eventCategory,
   location,
   startFormatted,
@@ -25,11 +25,10 @@ const justEvents = async ({
       event => ((event.source = "yelp"), (event.type = "event"))
     );
 
-    return yelpEventsData;
+    this.setState({ Events: [...yelpEventsData] });
   } catch {
-    return;
+    this.setState({ yelpEventsError: true });
   }
-
   try {
     let ticketMasterEvents = await fetch(
       "http://localhost:5000/ticketMasterSearch",
@@ -59,3 +58,5 @@ const justEvents = async ({
     this.setState({ ticketMasterError: true, eventsLoading: false });
   }
 };
+
+export default EventsSearch;
