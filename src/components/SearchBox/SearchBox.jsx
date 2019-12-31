@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { AppContext } from "../../AppContext";
 import DatePicker from "react-datepicker";
 import { VenuesSearch } from "../VenuesSearch";
+import { EventsSearch } from "../EventsSearch";
 import "react-datepicker/dist/react-datepicker.css";
 import "./SearchBox.css";
 
@@ -14,9 +15,11 @@ class SearchBox extends Component {
       term: "",
       location: "",
       renderVenuesSearch: true,
+      renderEventsSearch: true,
       searchAll: true,
       justEvents: false,
-      justVenues: false
+      justVenues: false,
+      eventCategory: ""
     };
   }
   componentDidMount() {
@@ -24,6 +27,11 @@ class SearchBox extends Component {
   }
   updateTextInput = event => {
     this.setState({ term: event.target.value });
+  };
+
+  categoryEventSearch = event => {
+    const { target } = event;
+    this.setState({ eventCategory: target.value });
   };
 
   updateLocation = event => {
@@ -44,6 +52,7 @@ class SearchBox extends Component {
       document.getElementById("searchAll").checked = false;
       this.setState({
         renderVenuesSearch: false,
+        renderEventsSearch: true,
         justEvents: true,
         justVenues: false,
         searchAll: false
@@ -54,6 +63,7 @@ class SearchBox extends Component {
       document.getElementById("searchAll").checked = false;
       this.setState({
         renderVenuesSearch: true,
+        renderEventsSearch: false,
         justVenues: true,
         justEvents: false,
         searchAll: false
@@ -64,6 +74,7 @@ class SearchBox extends Component {
       document.getElementById("searchAll").checked = false;
       this.setState({
         renderVenuesSearch: true,
+        renderEventsSearch: true,
         justVenues: false,
         justEvents: false,
         searchAll: true
@@ -249,6 +260,19 @@ class SearchBox extends Component {
     }
   };
 
+  renderEventsSearch = () => {
+    const { renderEventsSearch } = this.state;
+    if (renderEventsSearch) {
+      return (
+        <EventsSearch
+          categoryEventSearch={this.categoryEventSearch}
+        ></EventsSearch>
+      );
+    } else {
+      return;
+    }
+  };
+
   render() {
     return (
       <AppContext.Consumer>
@@ -279,6 +303,8 @@ class SearchBox extends Component {
               <br />
               <form action="">
                 {this.renderVenuesSearch()}
+                <br />
+                {this.renderEventsSearch()}
                 {/* <label htmlFor="">
                   What type of places are you looking for?
                 </label>
