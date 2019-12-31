@@ -225,15 +225,16 @@ class SearchBox extends Component {
     } else if (endFormatted === "") {
       alert("Must enter in a rough end time.");
     } else {
-      makecall(
-        term,
-        location,
-        startFormatted,
-        endFormatted,
-        radius,
-        endUnix,
-        startUnix
-      );
+      // makecall(
+      //   term,
+      //   location,
+      //   startFormatted,
+      //   endFormatted,
+      //   radius,
+      //   endUnix,
+      //   startUnix
+      // );
+      makecall(this.state);
     }
     this.setState({
       term: "",
@@ -301,7 +302,10 @@ class SearchBox extends Component {
                 onChange={this.VenuesSearch}
               />
               <br />
-              <form action="">
+              <form
+                action=""
+                onSubmit={e => this.onHandleSubmit(e, value.makeCall)}
+              >
                 {this.renderVenuesSearch()}
                 <br />
                 {this.renderEventsSearch()}
