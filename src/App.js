@@ -80,6 +80,8 @@ class App extends Component {
         event => event.category !== "kids-family"
       );
 
+      console.log(yelpEventsData);
+
       yelpEventsData.forEach(
         event => ((event.source = "yelp"), (event.type = "event"))
       );
@@ -119,7 +121,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <AppContext.Provider value={this.state}>
         <div>

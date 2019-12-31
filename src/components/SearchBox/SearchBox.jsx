@@ -12,6 +12,7 @@ class SearchBox extends Component {
     super(props);
     this.state = {
       term: "",
+      location: "",
       renderVenuesSearch: true,
       searchAll: true,
       justEvents: false,
@@ -23,6 +24,10 @@ class SearchBox extends Component {
   }
   updateTextInput = event => {
     this.setState({ term: event.target.value });
+  };
+
+  updateLocation = event => {
+    this.setState({ location: event.target.value });
   };
 
   handleRadiusChange = event => {
@@ -245,7 +250,6 @@ class SearchBox extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <AppContext.Consumer>
         {value => {
@@ -293,7 +297,7 @@ class SearchBox extends Component {
                   autoComplete="off"
                   placeholder="ex. 90015, Los Angeles, CA"
                   value={this.state.location}
-                  onChange={e => this.updateTextInput(e)}
+                  onChange={this.updateLocation}
                 />
                 <br />
                 <label htmlFor="">When are you meeting?</label>

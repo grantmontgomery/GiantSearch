@@ -9,6 +9,9 @@ node_modules
 #api-keys
 .env
 
+#eventcategories
+eventcategories.json
+
 #api-tests
 api/
 
