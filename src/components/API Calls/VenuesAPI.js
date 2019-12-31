@@ -1,4 +1,8 @@
-const VenuesSearch = async ({
+const VenuesAPI = async (
+  loading,
+  notLoading,
+  setBusinesses,
+  error,
   term,
   location,
   startFormatted,
@@ -6,13 +10,9 @@ const VenuesSearch = async ({
   radius,
   endUnix,
   startUnix
-}) => {
+) => {
   try {
-    this.setState({
-      venuesLoading: true,
-      Events: [],
-      Venues: []
-    });
+    loading("venues");
     let yelpBusinesses = await fetch(
       "http://localhost:5000/yelpBusinessSearch",
       {
@@ -27,10 +27,11 @@ const VenuesSearch = async ({
     let yelpBusinessesData = await yelpBusinesses.json();
     const { businesses } = yelpBusinessesData;
     businesses.forEach(business => (business["type"] = "venue"));
-    return businesses;
+    notLoading("venues");
+    setBusinesses(businesses);
   } catch {
-    return;
+    error("businesses");
   }
 };
 
-export default VenuesSearch;
+export default VenuesAPI;

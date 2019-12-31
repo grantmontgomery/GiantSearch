@@ -1,2 +1,2 @@
-export { default as VenuesSearch } from "./VenuesSearch";
-export { default as EventsSearch } from "./EventsSearch";
+export { default as VenuesAPI } from "./VenuesAPI";
+export { default as EventsAPI } from "./EventsAPI";

@@ -1,4 +1,9 @@
-const EventsSearch = async ({
+const EventsAPI = async (
+  loading,
+  notLoading,
+  setEvents,
+  error,
+
   eventCategory,
   location,
   startFormatted,
@@ -6,8 +11,9 @@ const EventsSearch = async ({
   radius,
   endUnix,
   startUnix
-}) => {
+) => {
   try {
+    loading("events");
     let yelpEvents = await fetch("http://localhost:5000/yelpEventSearch", {
       headers: {
         Accept: "application/json",
@@ -24,10 +30,9 @@ const EventsSearch = async ({
     yelpEventsData.forEach(
       event => ((event.source = "yelp"), (event.type = "event"))
     );
-
-    this.setState({ Events: [...yelpEventsData] });
+    setEvents(yelpEventsData);
   } catch {
-    this.setState({ yelpEventsError: true });
+    error("yelpevents");
   }
   try {
     let ticketMasterEvents = await fetch(
@@ -49,14 +54,12 @@ const EventsSearch = async ({
     events.forEach(
       event => ((event.source = "ticketmaster"), (event.type = "event"))
     );
-
-    this.setState(() => ({
-      Events: [...this.state.Events, ...events],
-      eventsLoading: false
-    }));
+    notLoading("events");
+    setEvents(events);
   } catch {
-    this.setState({ ticketMasterError: true, eventsLoading: false });
+    notLoading("events");
+    error("ticketmaster");
   }
 };
 
-export default EventsSearch;
+export default EventsAPI;
