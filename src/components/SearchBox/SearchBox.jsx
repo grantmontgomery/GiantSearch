@@ -225,15 +225,6 @@ class SearchBox extends Component {
     } else if (endFormatted === "") {
       alert("Must enter in a rough end time.");
     } else {
-      // makecall(
-      //   term,
-      //   location,
-      //   startFormatted,
-      //   endFormatted,
-      //   radius,
-      //   endUnix,
-      //   startUnix
-      // );
       makecall(this.state);
     }
     this.setState({
@@ -309,16 +300,7 @@ class SearchBox extends Component {
                 {this.renderVenuesSearch()}
                 <br />
                 {this.renderEventsSearch()}
-                {/* <label htmlFor="">
-                  What type of places are you looking for?
-                </label>
-                <input
-                  type="text"
-                  name="term"
-                  value={this.state.term}
-                  placeholder="Bars, restaurants, lounges, etc."
-                  onChange={e => this.updateTextInput(e)}
-                /> */}
+
                 <br />
                 <label htmlFor="">Where are you meeting?</label>
                 <input
@@ -371,19 +353,3 @@ class SearchBox extends Component {
 }
 
 export default SearchBox;
-// import React, { Component } from "react";
-// import "./SearchBox.css";
-
-// class SearchBox extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {};
-//   }
-//   render() {
-//     return <div className="searchbox">
-//       <span></span>
-//     </div>;
-//   }
-// }
-
-// export default SearchBox;

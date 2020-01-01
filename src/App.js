@@ -84,7 +84,7 @@ class App extends Component {
     startUnix
   }) => {
     if (justEvents) {
-      this.setState({ Venues: [] });
+      this.setState({ Events: [], Venues: [] });
       EventsAPI(
         this.loading,
         this.notLoading,
@@ -99,7 +99,7 @@ class App extends Component {
         startUnix
       );
     } else if (justVenues) {
-      this.setState({ Events: [] });
+      this.setState({ Events: [], Venues: [] });
       VenuesAPI(
         this.loading,
         this.notLoading,
@@ -114,6 +114,7 @@ class App extends Component {
         startUnix
       );
     } else if (searchAll) {
+      this.setState({ Events: [], Venues: [] });
       VenuesAPI(
         this.loading,
         this.notLoading,
