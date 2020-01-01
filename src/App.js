@@ -57,6 +57,11 @@ class App extends Component {
   };
 
   setEvents = events => {
+    events.forEach(event => {
+      if (event.source === "yelp") {
+        console.log(event);
+      }
+    });
     this.setState(() => ({ Events: [...this.state.Events, ...events] }));
   };
 
@@ -81,7 +86,9 @@ class App extends Component {
     endFormatted,
     radius,
     endUnix,
-    startUnix
+    startUnix,
+    yelpCategories,
+    ticketmasterCategories
   }) => {
     if (justEvents) {
       this.setState({ Events: [], Venues: [] });
@@ -96,7 +103,9 @@ class App extends Component {
         endFormatted,
         radius,
         endUnix,
-        startUnix
+        startUnix,
+        yelpCategories,
+        ticketmasterCategories
       );
     } else if (justVenues) {
       this.setState({ Events: [], Venues: [] });
@@ -139,7 +148,9 @@ class App extends Component {
         endFormatted,
         radius,
         endUnix,
-        startUnix
+        startUnix,
+        yelpCategories,
+        ticketmasterCategories
       );
     }
   };

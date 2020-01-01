@@ -20,10 +20,10 @@ const EventCategorySearch = (
   } else if (input === "NightLife") {
     setYelpCategory(["nightlife"]);
   } else if (input === "Festivals & Fairs") {
-    setYelpCategory(["festivals-and-fairs"]);
-  } else if (input === "Misc") {
+    setYelpCategory(["festivals-fairs"]);
+  } else if (input === "Other") {
     setTicketMasterCategory(["KZFzniwnSyZfZ7v7n1"]);
-    setYelpCategory(["official-yelp-events"]);
+    setYelpCategory(["official-yelp-events", "fashion"]);
   }
 };
 

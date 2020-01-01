@@ -3,6 +3,7 @@ import { AppContext } from "../../AppContext";
 import DatePicker from "react-datepicker";
 import { VenuesSearch } from "../VenuesSearch";
 import { EventsSearch } from "../EventsSearch";
+import { EventCategorySearch } from "../Logic";
 import "react-datepicker/dist/react-datepicker.css";
 import "./SearchBox.css";
 
@@ -19,7 +20,9 @@ class SearchBox extends Component {
       searchAll: true,
       justEvents: false,
       justVenues: false,
-      eventCategory: ""
+      eventCategory: "",
+      yelpCategories: null,
+      ticketmasterCategories: null
     };
   }
   componentDidMount() {
@@ -29,9 +32,30 @@ class SearchBox extends Component {
     this.setState({ term: event.target.value });
   };
 
+  setYelpCategory = input => {
+    this.setState({ yelpCategories: [...input] });
+  };
+
+  setTicketMasterCategory = input => {
+    this.setState({ ticketmasterCategories: [...input] });
+  };
+
   categoryEventSearch = event => {
     const { target } = event;
-    this.setState({ eventCategory: target.value });
+    if (target.value !== "") {
+      this.setState({ eventCategory: target.value });
+      EventCategorySearch(
+        target.value,
+        this.setYelpCategory,
+        this.setTicketMasterCategory
+      );
+    } else {
+      this.setState({
+        eventCategory: "",
+        yelpCategories: null,
+        ticketmasterCategories: null
+      });
+    }
   };
 
   updateLocation = event => {
@@ -266,6 +290,7 @@ class SearchBox extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <AppContext.Consumer>
         {value => {

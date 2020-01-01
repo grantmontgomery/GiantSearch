@@ -12,7 +12,9 @@ const EventsAPI = async (
   endFormatted,
   radius,
   endUnix,
-  startUnix
+  startUnix,
+  yelpCategories,
+  ticketmasterCategories
 ) => {
   try {
     loading("events");

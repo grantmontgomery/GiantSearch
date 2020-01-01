@@ -19,7 +19,7 @@ class EventsSearch extends Component {
           </option>
           <option value="Festivals & Fairs">Festivals & Fairs</option>
           <option value="Arts & Theatre">Arts & Theatre</option>
-          <option value="Misc">Misc</option>
+          <option value="Other">Other</option>
         </select>
       </React.Fragment>
     );
