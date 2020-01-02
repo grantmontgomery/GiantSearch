@@ -3,7 +3,10 @@ const EventCategorySearch = (
   setYelpCategory,
   setTicketMasterCategory
 ) => {
-  if (input === "Music") {
+  if (input === "All") {
+    setTicketMasterCategory("");
+    setYelpCategory("");
+  } else if (input === "Music") {
     setTicketMasterCategory(["KZFzniwnSyZfZ7v7nJ"]);
     setYelpCategory(["music"]);
   } else if (input === "Film") {

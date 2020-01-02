@@ -10,6 +10,7 @@ class EventsSearch extends Component {
         <label htmlFor="">What type of events are you looking for?</label>
         <select name="" id="" onChange={categoryEventSearch}>
           <option value="">Select a category (Optional)</option>
+          <option value="">All</option>
           <option value="Music">Music</option>
           <option value="Nightlife">Nightlife</option>
           <option value="Food & Drink">Food & Drink</option>

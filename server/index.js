@@ -38,12 +38,15 @@ app.post("/yelpEventSearch", (req, res) => {
       location: req.body.location,
       start_date: req.body.startUnix,
       end_date: req.body.endUnix,
-      radius: req.body.radius,
-      categories
+      radius: req.body.radius
     };
   Object.keys(params).forEach(key =>
     yelpEvents.searchParams.append(key, params[key])
   );
+
+  if (categories !== null) {
+    yelpEvents.searchParams.append("categories", categories);
+  }
   fetch(yelpEvents, {
     headers: {
       Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
@@ -55,6 +58,7 @@ app.post("/yelpEventSearch", (req, res) => {
 });
 
 app.post("/ticketMasterSearch", (req, res) => {
+  //This does not work when the length is 0 for this.
   const segmentId = req.body.ticketmasterCategories;
   const ticketMaster = new URL(
       "https://app.ticketmaster.com/discovery/v2/events"
@@ -63,13 +67,16 @@ app.post("/ticketMasterSearch", (req, res) => {
       apikey: `${process.env.REACT_APP_TICKETMASTER_API_KEY}`,
       startDateTime: req.body.startFormatted,
       endDateTime: req.body.endFormatted,
-      radius: 2000,
-      segmentId
+      radius: 2000
     };
 
   Object.keys(arguments).forEach(key =>
     ticketMaster.searchParams.append(key, arguments[key])
   );
+
+  if (segmentId !== null) {
+    ticketMaster.searchParams.append("segmentId", segmentId);
+  }
 
   isNaN(parseInt(req.body.location)) === true
     ? ticketMaster.searchParams.append("city", req.body.location)
