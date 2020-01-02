@@ -24,7 +24,8 @@ class SearchBox extends Component {
       eventCategory: "",
       radiusStr: "",
       yelpCategories: null,
-      ticketmasterCategories: null
+      ticketmasterCategories: null,
+      makeCall: false
     };
   }
   componentDidMount() {
@@ -202,17 +203,22 @@ class SearchBox extends Component {
       startDate: "",
       endDate: "",
       startFormatted: "",
-      radius: ""
+      radius: "",
+      makeCall: false
     });
   };
 
-  makeCall = thecall => {
-    thecall(this.state);
+  setMakeCall = () => {
+    this.setState({ makeCall: true });
   };
 
-  onHandleSubmit = event => {
+  onHandleSubmit = (event, callAPIs) => {
     event.preventDefault();
-    SearchSelect(event, this.makeCall, this.resetState, this.state);
+    const { makeCall } = this.state;
+    SearchSelect(this.setMakeCall, this.resetState, this.state);
+    if (makeCall) {
+      callAPIs(this.state);
+    }
   };
 
   renderVenuesSearch = () => {
@@ -274,9 +280,7 @@ class SearchBox extends Component {
               <br />
               <form
                 action=""
-                onSubmit={e =>
-                  this.onHandleSubmit(this.makeCall(value.makeCall))
-                }
+                onSubmit={e => this.onHandleSubmit(e, value.callAPIs)}
               >
                 {this.renderVenuesSearch()}
                 <br />
@@ -326,11 +330,7 @@ class SearchBox extends Component {
                   <option value="16100">Within 10 miles</option>
                   <option value="40250">Within 25 miles</option>
                 </select>
-                <button
-                  onClick={e =>
-                    this.onHandleSubmit(this.makeCall(value.makeCall))
-                  }
-                >
+                <button onClick={e => this.onHandleSubmit(e, value.callAPIs)}>
                   Submit
                 </button>
               </form>

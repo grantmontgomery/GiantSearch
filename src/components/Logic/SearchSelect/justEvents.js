@@ -3,7 +3,7 @@ const justEventsLogic = (
   startFormatted,
   endFormatted,
   radius,
-  makeCall,
+  setMakeCall,
   resetState
 ) => {
   if (
@@ -49,7 +49,7 @@ const justEventsLogic = (
   ) {
     alert("Please enter in a radius");
   } else {
-    makeCall();
+    setMakeCall();
     resetState();
   }
 };

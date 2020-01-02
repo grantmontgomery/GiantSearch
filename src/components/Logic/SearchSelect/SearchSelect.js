@@ -3,8 +3,7 @@ import justVenuesLogic from "./justVenues";
 import searchAllLogic from "./searchAll";
 
 const SearchSelect = (
-  event,
-  makeCall,
+  setMakeCall,
   resetState,
   {
     location,
@@ -17,14 +16,13 @@ const SearchSelect = (
     justVenues
   }
 ) => {
-  event.preventDefault();
   if (justEvents) {
     justEventsLogic(
       location,
       startFormatted,
       endFormatted,
       radius,
-      makeCall,
+      setMakeCall,
       resetState
     );
   } else if (justVenues) {
@@ -34,7 +32,7 @@ const SearchSelect = (
       startFormatted,
       endFormatted,
       radius,
-      makeCall,
+      setMakeCall,
       resetState
     );
   } else if (searchAll) {
@@ -44,7 +42,7 @@ const SearchSelect = (
       startFormatted,
       endFormatted,
       radius,
-      makeCall,
+      setMakeCall,
       resetState
     );
   }

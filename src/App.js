@@ -16,7 +16,7 @@ class App extends Component {
       Parts: [],
       venuesLoading: false,
       eventsLoading: false,
-      makeCall: this.makeCall,
+      callAPIs: this.callAPIs,
       addPart: this.addPart,
       removePart: this.removePart
     };
@@ -75,7 +75,7 @@ class App extends Component {
     }
   };
 
-  makeCall = ({
+  callAPIs = ({
     term,
     searchAll,
     justEvents,

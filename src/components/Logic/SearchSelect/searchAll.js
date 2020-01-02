@@ -4,7 +4,7 @@ const searchAllLogic = (
   startFormatted,
   endFormatted,
   radius,
-  makecall,
+  makeCall,
   resetState
 ) => {
   if (
@@ -56,7 +56,7 @@ const searchAllLogic = (
   ) {
     alert("Please enter in a radius");
   } else {
-    makecall();
+    makeCall();
     resetState();
   }
 };

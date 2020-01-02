@@ -4,7 +4,7 @@ const justVenuesLogic = (
   startFormatted,
   endFormatted,
   radius,
-  makeCall,
+  setMakeCall,
   resetState
 ) => {
   if (
@@ -56,7 +56,7 @@ const justVenuesLogic = (
   ) {
     alert("Please enter in a radius");
   } else {
-    makeCall();
+    setMakeCall();
     resetState();
   }
 };
