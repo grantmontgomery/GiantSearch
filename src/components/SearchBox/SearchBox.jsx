@@ -21,6 +21,7 @@ class SearchBox extends Component {
       justEvents: false,
       justVenues: false,
       eventCategory: "",
+      radiusStr: "",
       yelpCategories: null,
       ticketmasterCategories: null
     };
@@ -65,7 +66,7 @@ class SearchBox extends Component {
   handleRadiusChange = event => {
     const { target } = event;
     const valuetoInt = parseInt(target.value);
-    this.setState({ [target.name]: valuetoInt });
+    this.setState({ radius: valuetoInt, radiusStr: target.value });
   };
 
   VenuesSearch = event => {
@@ -186,6 +187,24 @@ class SearchBox extends Component {
     });
   };
 
+  resetState = () => {
+    this.setState({
+      term: "",
+      location: "",
+      endFormatted: "",
+      eventCategory: "",
+      yelpCategories: null,
+      ticketmasterCategories: null,
+      endUnix: null,
+      startUnix: null,
+      radiusStr: "",
+      startDate: "",
+      endDate: "",
+      startFormatted: "",
+      radius: ""
+    });
+  };
+
   onHandleSubmit = (event, makecall) => {
     event.preventDefault();
     const {
@@ -255,8 +274,14 @@ class SearchBox extends Component {
       term: "",
       location: "",
       endFormatted: "",
+      eventCategory: "",
+      yelpCategories: null,
+      ticketmasterCategories: null,
       endUnix: null,
       startUnix: null,
+      radiusStr: "",
+      startDate: "",
+      endDate: "",
       startFormatted: "",
       radius: ""
     });
@@ -277,10 +302,11 @@ class SearchBox extends Component {
   };
 
   renderEventsSearch = () => {
-    const { renderEventsSearch } = this.state;
+    const { renderEventsSearch, eventCategory } = this.state;
     if (renderEventsSearch) {
       return (
         <EventsSearch
+          eventCategory={eventCategory}
           categoryEventSearch={this.categoryEventSearch}
         ></EventsSearch>
       );
@@ -358,8 +384,13 @@ class SearchBox extends Component {
                 ></DatePicker>
                 <br />
                 <label htmlFor="">What's the area of your search?</label>
-                <select name="radius" id="" onChange={this.handleRadiusChange}>
-                  <option value="none">Select miles...</option>
+                <select
+                  name="radius"
+                  id=""
+                  value={this.state.radiusStr}
+                  onChange={this.handleRadiusChange}
+                >
+                  <option value="">Select miles...</option>
                   <option value="1610">Within 1 mile</option>
                   <option value="8050">Within 5 miles</option>
                   <option value="16100">Within 10 miles</option>
