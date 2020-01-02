@@ -1,10 +1,10 @@
-import justEvents from "./justEvents";
-import justVenues from "./justVenues";
-import searchAll from "./searchAll";
+import justEventsLogic from "./justEvents";
+import justVenuesLogic from "./justVenues";
+import searchAllLogic from "./searchAll";
 
 const SearchSelect = (
   event,
-  makecall,
+  makeCall,
   resetState,
   {
     location,
@@ -19,8 +19,35 @@ const SearchSelect = (
 ) => {
   event.preventDefault();
   if (justEvents) {
+    justEventsLogic(
+      location,
+      startFormatted,
+      endFormatted,
+      radius,
+      makeCall,
+      resetState
+    );
+  } else if (justVenues) {
+    justVenuesLogic(
+      term,
+      location,
+      startFormatted,
+      endFormatted,
+      radius,
+      makeCall,
+      resetState
+    );
+  } else if (searchAll) {
+    searchAllLogic(
+      term,
+      location,
+      startFormatted,
+      endFormatted,
+      radius,
+      makeCall,
+      resetState
+    );
   }
-  resetState();
 };
 
 export default SearchSelect;

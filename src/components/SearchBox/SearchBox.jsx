@@ -3,6 +3,7 @@ import { AppContext } from "../../AppContext";
 import DatePicker from "react-datepicker";
 import { VenuesSearch } from "../VenuesSearch";
 import { EventsSearch } from "../EventsSearch";
+import { SearchSelect } from "../Logic";
 import { EventCategorySearch } from "../Logic";
 import "react-datepicker/dist/react-datepicker.css";
 import "./SearchBox.css";
@@ -205,86 +206,13 @@ class SearchBox extends Component {
     });
   };
 
-  onHandleSubmit = (event, makecall) => {
+  makeCall = thecall => {
+    thecall(this.state);
+  };
+
+  onHandleSubmit = event => {
     event.preventDefault();
-    const {
-      location,
-      startFormatted,
-      term,
-      endFormatted,
-      endUnix,
-      startUnix,
-      radius
-    } = this.state;
-    if (
-      term === "" &&
-      location === "" &&
-      startFormatted === "" &&
-      endFormatted === ""
-    ) {
-      alert("Must enter in a term, times, and location");
-    } else if (
-      term === "" &&
-      location === "" &&
-      startFormatted !== "" &&
-      endFormatted !== ""
-    ) {
-      alert("Must enter in a term and location");
-    } else if (
-      startFormatted === "" &&
-      endFormatted === "" &&
-      location === "" &&
-      term !== ""
-    ) {
-      alert("Must enter in times and location");
-    } else if (
-      startFormatted === "" &&
-      endFormatted === "" &&
-      term === "" &&
-      location !== ""
-    ) {
-      alert("Must enter in times and term");
-    } else if (
-      term === "" &&
-      startFormatted !== "" &&
-      endFormatted !== "" &&
-      location !== ""
-    ) {
-      alert("Must enter in a term.");
-    } else if (
-      startFormatted === "" &&
-      endFormatted === "" &&
-      term !== "" &&
-      location !== ""
-    ) {
-      alert("Must enter times");
-    } else if (
-      location === "" &&
-      startFormatted !== "" &&
-      endFormatted !== "" &&
-      term !== ""
-    ) {
-      alert("Must enter in a location");
-    } else if (endFormatted === "") {
-      alert("Must enter in a rough end time.");
-    } else {
-      makecall(this.state);
-    }
-    this.setState({
-      term: "",
-      location: "",
-      endFormatted: "",
-      eventCategory: "",
-      yelpCategories: null,
-      ticketmasterCategories: null,
-      endUnix: null,
-      startUnix: null,
-      radiusStr: "",
-      startDate: "",
-      endDate: "",
-      startFormatted: "",
-      radius: ""
-    });
+    SearchSelect(event, this.makeCall, this.resetState, this.state);
   };
 
   renderVenuesSearch = () => {
@@ -346,7 +274,9 @@ class SearchBox extends Component {
               <br />
               <form
                 action=""
-                onSubmit={e => this.onHandleSubmit(e, value.makeCall)}
+                onSubmit={e =>
+                  this.onHandleSubmit(this.makeCall(value.makeCall))
+                }
               >
                 {this.renderVenuesSearch()}
                 <br />
@@ -396,7 +326,11 @@ class SearchBox extends Component {
                   <option value="16100">Within 10 miles</option>
                   <option value="40250">Within 25 miles</option>
                 </select>
-                <button onClick={e => this.onHandleSubmit(e, value.makeCall)}>
+                <button
+                  onClick={e =>
+                    this.onHandleSubmit(this.makeCall(value.makeCall))
+                  }
+                >
                   Submit
                 </button>
               </form>

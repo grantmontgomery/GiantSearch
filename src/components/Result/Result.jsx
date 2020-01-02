@@ -56,9 +56,9 @@ class Result extends Component {
           id: props.Result.id,
           image: props.Result.image_url,
           type: props.Result.type,
-          location: `${props.Result.location.address1.toLowerCase()}, ${
-            props.Result.location.city
-          }`,
+          // location: `${props.Result.location.address1.toLowerCase()}, ${
+          //   props.Result.location.city
+          // }`,
           source: props.Result.source,
           AddRemove: "+",
           buttonSwitch: "add"
@@ -231,9 +231,10 @@ class Result extends Component {
                         </a>
                       </li>
                       <li>{this.props.Result.time_start}</li>
-                      <li>{`${this.props.Result.location.address1.toLowerCase()}, ${
+                      {/* <li>{`${this.props.Result.location.address1.toLowerCase()}, ${
                         this.props.Result.location.city
-                      }`}</li>
+                      }`}</li> */}
+                      <li>{`${this.props.Result.location.city}`}</li>
                     </ul>
                   </div>
                 </div>
