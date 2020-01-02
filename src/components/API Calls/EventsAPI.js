@@ -24,7 +24,13 @@ const EventsAPI = async (
         "Content-Type": "application/json"
       },
       method: "POST",
-      body: JSON.stringify({ location, radius, startUnix, endUnix })
+      body: JSON.stringify({
+        location,
+        radius,
+        startUnix,
+        endUnix,
+        yelpCategories
+      })
     });
 
     let yelpEventsData = (await yelpEvents.json()).events.filter(
@@ -47,7 +53,12 @@ const EventsAPI = async (
           "Content-Type": "application/json"
         },
         method: "POST",
-        body: JSON.stringify({ location, startFormatted, endFormatted })
+        body: JSON.stringify({
+          location,
+          startFormatted,
+          endFormatted,
+          ticketmasterCategories
+        })
       }
     );
 

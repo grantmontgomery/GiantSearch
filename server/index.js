@@ -32,12 +32,14 @@ app.post("/yelpBusinessSearch", (req, res) => {
 });
 
 app.post("/yelpEventSearch", (req, res) => {
+  const categories = req.body.yelpCategories;
   const yelpEvents = new URL("https://api.yelp.com/v3/events"),
     params = {
       location: req.body.location,
       start_date: req.body.startUnix,
       end_date: req.body.endUnix,
-      radius: req.body.radius
+      radius: req.body.radius,
+      categories
     };
   Object.keys(params).forEach(key =>
     yelpEvents.searchParams.append(key, params[key])
@@ -53,6 +55,7 @@ app.post("/yelpEventSearch", (req, res) => {
 });
 
 app.post("/ticketMasterSearch", (req, res) => {
+  const segmentId = req.body.ticketmasterCategories;
   const ticketMaster = new URL(
       "https://app.ticketmaster.com/discovery/v2/events"
     ),
@@ -60,7 +63,8 @@ app.post("/ticketMasterSearch", (req, res) => {
       apikey: `${process.env.REACT_APP_TICKETMASTER_API_KEY}`,
       startDateTime: req.body.startFormatted,
       endDateTime: req.body.endFormatted,
-      radius: 2000
+      radius: 2000,
+      segmentId
     };
 
   Object.keys(arguments).forEach(key =>
