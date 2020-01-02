@@ -58,7 +58,6 @@ app.post("/yelpEventSearch", (req, res) => {
 });
 
 app.post("/ticketMasterSearch", (req, res) => {
-  //This does not work when the length is 0 for this.
   const segmentId = req.body.ticketmasterCategories;
   const ticketMaster = new URL(
       "https://app.ticketmaster.com/discovery/v2/events"
