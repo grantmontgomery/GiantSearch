@@ -214,11 +214,12 @@ class SearchBox extends Component {
 
   onHandleSubmit = (event, callAPIs) => {
     event.preventDefault();
-    const { makeCall } = this.state;
     SearchSelect(this.setMakeCall, this.resetState, this.state);
-    if (makeCall) {
+    if (this.state.makeCall === true) {
       callAPIs(this.state);
     }
+
+    // callAPIs(this.state);
   };
 
   renderVenuesSearch = () => {
@@ -250,7 +251,7 @@ class SearchBox extends Component {
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.state.makeCall);
     return (
       <AppContext.Consumer>
         {value => {

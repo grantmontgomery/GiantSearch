@@ -16,7 +16,7 @@ const SearchSelect = (
     justVenues
   }
 ) => {
-  if (justEvents) {
+  if (justEvents === true) {
     justEventsLogic(
       location,
       startFormatted,
@@ -25,7 +25,7 @@ const SearchSelect = (
       setMakeCall,
       resetState
     );
-  } else if (justVenues) {
+  } else if (justVenues === true) {
     justVenuesLogic(
       term,
       location,
@@ -35,7 +35,7 @@ const SearchSelect = (
       setMakeCall,
       resetState
     );
-  } else if (searchAll) {
+  } else if (searchAll === true) {
     searchAllLogic(
       term,
       location,
