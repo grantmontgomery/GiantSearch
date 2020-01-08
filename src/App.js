@@ -3,9 +3,11 @@ import { SearchBox, VenuesSearch } from "./components";
 import { Results } from "./components";
 import { AppContext } from "./AppContext";
 import { EventsAPI } from "./components";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { VenuesAPI } from "./components";
 import { Scheduler } from "./components";
 import { Parts } from "./components";
+import "./App.css";
 require("dotenv").config();
 
 class App extends Component {
@@ -156,10 +158,22 @@ class App extends Component {
     }
   };
 
+  applyPageTransition = () => {
+    return (
+      <CSSTransition
+        key="scheduler"
+        timeout={400}
+        classNames="slide-transition"
+      >
+        <Scheduler key="scheduler"></Scheduler>
+      </CSSTransition>
+    );
+  };
+
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        <div>
+        <div key="">
           <Parts Parts={this.state.Parts}></Parts>
           <SearchBox></SearchBox>
           <Results
@@ -167,7 +181,7 @@ class App extends Component {
             Venues={this.state.Venues}
           ></Results>
         </div>
-        <Scheduler></Scheduler>
+        <TransitionGroup>{this.applyPageTransition()}</TransitionGroup>
       </AppContext.Provider>
     );
   }
