@@ -12,15 +12,15 @@
 .parts-wrapper {
   text-align: left;
   -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
+  -ms-flex-pack: left;
+  justify-content: left;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
   position: relative;
   float: left;
   left: 5px;
@@ -47,7 +47,7 @@
 
 .parts-wrapper .list li:hover {
   -webkit-transform: scale(1.01);
-          transform: scale(1.01);
+  transform: scale(1.01);
   -webkit-transition: 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transition: 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -79,6 +79,11 @@
   border: solid black 1px;
 }
 
+.scheduler {
+  float: right;
+  right: 0;
+}
+
 .parts-dropdown::-webkit-scrollbar-thumb {
   background: white;
 }
@@ -86,22 +91,22 @@
 @-webkit-keyframes slideOut {
   0% {
     -webkit-transform: translate(0);
-            transform: translate(0);
+    transform: translate(0);
   }
   100% {
     -webkit-transform: translate(-300px);
-            transform: translate(-300px);
+    transform: translate(-300px);
   }
 }
 
 @keyframes slideOut {
   0% {
     -webkit-transform: translate(0);
-            transform: translate(0);
+    transform: translate(0);
   }
   100% {
     -webkit-transform: translate(-300px);
-            transform: translate(-300px);
+    transform: translate(-300px);
   }
 }
 
@@ -109,14 +114,14 @@
   opacity: 0;
   max-height: 50px;
   -webkit-transform: translate(-300px);
-          transform: translate(-300px);
+  transform: translate(-300px);
   -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out;
 }
 
 .slide-transition-enter.slide-transition-enter-active {
   -webkit-transform: translate(0);
-          transform: translate(0);
+  transform: translate(0);
   opacity: 1;
   max-height: 50px;
 }
@@ -125,16 +130,16 @@
   opacity: 1;
   max-height: 50px;
   -webkit-transform: translate(0);
-          transform: translate(0);
+  transform: translate(0);
   -webkit-transition: all 400ms ease-in-out;
   transition: all 400ms ease-in-out;
 }
 
 .slide-transition-exit.slide-transition-exit-active {
   -webkit-animation-name: slideOut;
-          animation-name: slideOut;
+  animation-name: slideOut;
   -webkit-animation-duration: 400ms;
-          animation-duration: 400ms;
+  animation-duration: 400ms;
   -webkit-transition: all 350ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
   transition: all 350ms cubic-bezier(0.5, 0.01, 0.84, 0.67);
   opacity: 0;

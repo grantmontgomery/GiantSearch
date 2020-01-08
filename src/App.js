@@ -4,6 +4,7 @@ import { Results } from "./components";
 import { AppContext } from "./AppContext";
 import { EventsAPI } from "./components";
 import { VenuesAPI } from "./components";
+import { Scheduler } from "./components";
 import { Parts } from "./components";
 require("dotenv").config();
 
@@ -166,6 +167,7 @@ class App extends Component {
             Venues={this.state.Venues}
           ></Results>
         </div>
+        <Scheduler></Scheduler>
       </AppContext.Provider>
     );
   }

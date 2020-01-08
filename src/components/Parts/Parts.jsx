@@ -42,6 +42,7 @@ class Parts extends Component {
           {this.renderPartsNotifications(Parts)}
           Parts
         </div>
+        <button className="scheduler">Scheduler</button>
 
         <div className="parts-dropdown scrollbar">
           <div className="parts-wrapper">
